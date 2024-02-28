@@ -1,0 +1,128 @@
+.traveller-page {
+  background-image: linear-gradient(
+    to right,
+    #f86c00 0%,
+    #f98e23 100%
+  ) !important;
+  height: auto;
+}
+
+.buyer-page {
+  background-image: linear-gradient(
+    -20deg,
+    #6e45e2 0%,
+    #88d3ce 100%
+  ) !important;
+  height: auto;
+}
+
+.login-page {
+  background-image: linear-gradient(
+    -20deg,
+    #6e45e2 0%,
+    #88d3ce 100%
+  ) !important;
+  height: 100vh;
+}
+
+/* Inputs */
+input:focus {
+  box-shadow: none;
+}
+
+input {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+input::placeholder {
+  font-size: small;
+}
+
+.traveller-input-border {
+  border-color: #f75c03;
+}
+
+.buyer-input-border {
+  border-color: #f75c03;
+}
+
+/* Phone */
+.react-international-phone-input {
+  width: 100%;
+}
+
+.small-text {
+  line-height: 1px;
+  font-size: 11px;
+  color: red;
+}
+
+.password-small-text {
+  line-height: 12px;
+  font-size: 11px;
+  color: red;
+}
+
+/* Btns */
+.btns {
+  padding: 0.6em 4.3em;
+  font-weight: 900;
+  font-size: 18px;
+  border-radius: 0.4em;
+  box-shadow: 0.1em 0.1em #000;
+  cursor: pointer;
+  border: none;
+}
+
+.btns:hover {
+  transform: translate(-0.05em, -0.05em);
+  box-shadow: 0.15em 0.15em;
+}
+
+.btns:active {
+  transform: translate(0.05em, 0.05em);
+  box-shadow: 0.05em 0.05em;
+}
+
+.account-img {
+  object-fit: cover !important;
+  width: 100%;
+  height: 100%;
+}
+
+/* Forgot Password */
+@media (min-width: 992px) {
+  .forgot-password-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 90%;
+    width: 35%;
+    z-index: 1100 !important;
+  }
+}
+@media (max-width: 768px) {
+  .forgot-password-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 90%;
+    width: 70%;
+    z-index: 1100 !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .forgot-password-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 90%;
+    width: 96%;
+    z-index: 1100 !important;
+  }
+}

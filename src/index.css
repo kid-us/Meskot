@@ -1,0 +1,218 @@
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&family=Raleway:wght@100;400&family=Russo+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
+
+/* ###################### Global styles  */
+:root {
+  --buyer-color: #2274a5;
+  --traveler-color: #f75c03;
+}
+
+body {
+  background-color: #f7f7f7;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Poppins", sans-serif;
+}
+
+.font-poppins {
+  font-family: "Poppins", sans-serif !important;
+}
+
+p,
+a,
+li,
+span,
+input,
+label,
+textarea {
+  font-family: "Raleway", sans-serif;
+}
+
+button {
+  font-family: "Raleway", sans-serif;
+}
+
+input[type="checkbox"] {
+  width: 20px;
+  height: 19px;
+}
+
+.buyers-text {
+  color: var(--buyer-color);
+}
+
+.travelers-text {
+  color: var(--traveler-color);
+}
+
+.buyers-bg {
+  background-color: var(--buyer-color);
+}
+
+.travelers-bg {
+  background-color: var(--traveler-color);
+}
+
+a {
+  text-decoration: none;
+}
+
+p a {
+  text-decoration: none;
+}
+
+ul li {
+  list-style: none;
+}
+
+ul li a {
+  text-decoration: none;
+}
+
+::-webkit-scrollbar {
+  height: 5px;
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #8c8a8a;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+option {
+  font-size: smaller !important;
+  font-weight: 600;
+  font-family: "Raleway", sans-serif !important;
+}
+
+/* Small Device */
+@media (max-width: 576px) {
+}
+/* Medium Device */
+@media (min-width: 768px) {
+}
+/* Large Device */
+@media (min-width: 992px) {
+}
+
+.note {
+  font-size: clamp(13px, 3vw, 16px) !important;
+}
+
+/* Dropdown */
+.dropdown {
+  position: fixed;
+  border-radius: 3px;
+  right: 0;
+  top: 4.1em;
+  width: 13%;
+  line-height: 10px;
+}
+
+/* Menu */
+.menu {
+  position: fixed;
+  top: 4.1em;
+  width: 100%;
+  line-height: 10px;
+  height: 100svh;
+}
+
+/* Footer */
+.buyers-footer {
+  background-color: var(--buyer-color);
+}
+
+.travelers-footer {
+  background-color: var(--traveler-color);
+}
+
+.default-bg {
+  background-color: #3e3d3d;
+}
+
+.social-media {
+  border-radius: 20%;
+  color: #fff;
+  padding: 3px !important ;
+}
+
+.footer-links:hover {
+  color: #bdbdbe !important;
+}
+
+/* Orders */
+.orders {
+  height: auto;
+}
+
+/* Small Device */
+@media (max-width: 576px) {
+  .order-img-container {
+    height: 130px;
+  }
+}
+/* Medium Device */
+@media (min-width: 768px) {
+  .order-img-container {
+    height: 200px;
+  }
+}
+/* Large Device */
+@media (min-width: 992px) {
+  .order-img-container {
+    height: 200px;
+  }
+}
+
+.order-img {
+  width: 75%;
+  aspect-ratio: 4/3;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  transition: 0.5s !important;
+}
+
+.order-img:hover {
+  scale: 0.95;
+  transition: 0.5s;
+}
+
+.order-info {
+  line-height: 6px;
+  padding: 0.5px;
+}
+
+/* Filter */
+.small-filter {
+  background-color: #fff;
+  position: fixed;
+  width: 100%;
+  height: 400px;
+  z-index: 999;
+  bottom: 0;
+  overflow: auto;
+}
+
+/* Price Range */
+.bar-inner {
+  z-index: -1 !important;
+  background-color: #3e3d3d !important;
+}
+.thumb {
+  z-index: 0 !important;
+  background-color: #2274a5 !important;
+}

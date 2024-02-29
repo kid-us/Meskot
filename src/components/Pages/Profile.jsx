@@ -113,7 +113,7 @@ const Profile = () => {
 
       <div className="container my-5 pt-5">
         <div className="row justify-content-center">
-          <div className="col-lg-7 col-md-10 col-12 bg-white shadow fw-semibold p-5 rounded">
+          <div className="col-lg-7 col-md-10 col-12 bg-white shadow fw-semibold p-lg-5 p-4 rounded">
             <p className="fs-5">Make a change on your account!</p>
             <p>
               " You can't change your Phone Number and Email address but you can

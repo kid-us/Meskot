@@ -7,7 +7,8 @@ import axios from "axios";
 import { request } from "../../../constant/request";
 import { Link } from "react-router-dom";
 import Swiper from "../../Banners/Swiper";
-import "../../../app.css";
+// import "../../../app.css";
+import "./user.css";
 // import
 
 const NotLoginUser = () => {

@@ -7,7 +7,8 @@ import { request } from "../../../constant/request";
 import { Link } from "react-router-dom";
 import About from "../../About/About";
 import Swiper from "../../Banners/Swiper";
-import "../../../app.css";
+// import "../../../app.css";
+import "./user.css";
 
 const LoginUserPage = ({ userData }) => {
   const [blogs, setBlogs] = useState();

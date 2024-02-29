@@ -79,3 +79,37 @@
   width: 50%;
   height: auto;
 }
+
+/* Small Device */
+@media (max-width: 576px) {
+  .notification {
+    position: absolute;
+    top: 1em;
+    right: 0.5em;
+    width: 96%;
+    background-color: #fff;
+    border-radius: 5px;
+  }
+}
+/* Medium Device */
+@media (min-width: 768px) {
+  .notification {
+    position: absolute;
+    top: 1em;
+    right: 0.5em;
+    width: 70%;
+    background-color: #fff;
+    border-radius: 5px;
+  }
+}
+/* Large Device */
+@media (min-width: 992px) {
+  .notification {
+    position: absolute;
+    top: 1em;
+    right: 0.5em;
+    width: 35%;
+    background-color: #fff;
+    border-radius: 5px;
+  }
+}

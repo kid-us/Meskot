@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "../../../app.css";
 import Hero from "./Hero";
-import NavBar from "../../NAvBar";
+import NavBar from "../../NavBar";
 import Footer from "../../Footer";
 import axios from "axios";
 import { request } from "../../../constant/request";
 import { Link } from "react-router-dom";
+import AboutUs from "../AboutUs";
+import Swiper from "../../Banners/Swiper";
+
 const LoginUserPage = ({ userData }) => {
   const [blogs, setBlogs] = useState();
 
@@ -31,7 +34,11 @@ const LoginUserPage = ({ userData }) => {
       <div className="hero-bg">
         <Hero signBtn={true}></Hero>
       </div>
-      <div className="container">
+
+      <div className="container mt-5">
+        <p className="font-poppins fs-2">Our Products</p>
+        <Swiper></Swiper>
+
         {/* <About></About> */}
         {blogs && (
           <div className="row justify-content-center my-5">
@@ -85,6 +92,7 @@ const LoginUserPage = ({ userData }) => {
           </div>
         )}
       </div>
+      <AboutUs></AboutUs>
       <Footer></Footer>
     </>
   );

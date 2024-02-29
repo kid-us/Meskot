@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Country from "../Country";
 import Filter from "../Filter";
 
 const LargeFilter = () => {

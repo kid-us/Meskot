@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../context/Auth";
-import NavBar from "../NAvBar";
+import NavBar from "../NavBar";
 import Footer from "../Footer";
 import Products from "../Order/Products";
 import { Link } from "react-router-dom";
@@ -335,7 +335,6 @@ const Orders = () => {
             style={{ border: "none", boxShadow: "none", color: "#fff" }}
             className="text-black font-monospace pt-3"
           />
-          <LargeFilter></LargeFilter>
           <LargeFilter></LargeFilter>
         </div>
       )}

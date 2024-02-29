@@ -4,15 +4,19 @@ import { Link } from "react-router-dom";
 import { dropdown } from "../../constant/dropdown";
 import { navbar } from "../../constant/navbar";
 import { useAuth } from "../../context/Auth";
+import Notification from "./Notification";
 
-const Large = ({ user }) => {
+const Large = ({ user, notification }) => {
   const { logout } = useAuth();
 
   const [dropdownClick, setDropdownClick] = useState(false);
+  const [notificationClick, setNotificationClick] = useState(false);
+  // Dropdown
   const handleDropdown = () => {
     setDropdownClick(!dropdownClick);
   };
 
+  // Logout
   const handleLogout = () => {
     logout();
   };
@@ -26,11 +30,7 @@ const Large = ({ user }) => {
               <div className="col-12 ms-5">
                 <Link to="/">
                   <img src={logo2} alt="Logo" width={"27px"} />
-                  <span
-                    className={` ${user && "text-black"} ms-lg-3 ms-1 fs-5`}
-                  >
-                    Meskot
-                  </span>
+                  <span className={`text-black ms-lg-3 ms-1 fs-5`}>Meskot</span>
                 </Link>
               </div>
             </div>
@@ -65,16 +65,26 @@ const Large = ({ user }) => {
                     ></span>
                   </p>
                 </div>
+                {notification.length > 0 && (
+                  <div className="col-1 ps-5 position-relative">
+                    <p
+                      onClick={() => setNotificationClick(!notificationClick)}
+                      className="cursor bi-bell-fill buyers-text"
+                    >
+                      <span className="position-absolute top-0 start-75 ms-3 translate-middle badge rounded-pill bg-danger"></span>
+                    </p>
+                  </div>
+                )}
               </div>
             ) : (
               <div className="row justify-content-end g-0">
                 <div className="col-1 text-end">
-                  <Link to={"/login"} className="">
+                  <Link to={"/login"} className="text-black">
                     Blog
                   </Link>
                 </div>
                 <div className="col-1 text-end">
-                  <Link to={"/login"} className="">
+                  <Link to={"/login"} className="text-black">
                     About Us
                   </Link>
                 </div>
@@ -91,6 +101,8 @@ const Large = ({ user }) => {
           </div>
         </div>
       </div>
+
+      {/* Dropdown */}
       {dropdownClick && (
         <div className={`dropdown bg-white py-3 ps-4 shadow fw-semibold`}>
           {dropdown.map((drop, index) => (
@@ -110,6 +122,11 @@ const Large = ({ user }) => {
             </Link>
           ))}
         </div>
+      )}
+
+      {/* Notification */}
+      {notificationClick && (
+        <Notification notification={notification}></Notification>
       )}
     </>
   );

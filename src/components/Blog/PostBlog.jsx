@@ -86,7 +86,7 @@ const PostBlog = () => {
   return (
     <>
       <Nav user={auth} logout={logout}></Nav>
-      <ToastContainer theme="dark" className={"mt-5"} />
+      <ToastContainer theme="dark" className="mt-5" />
 
       <div className="container mt-4 fw-semibold mb-3">
         <div className="row justify-content-center">

@@ -40,9 +40,6 @@ export const AuthProvider = ({ children }) => {
             )
             .then((response) => {
               setAuth(response.data);
-              // if (response.data.User_Type === "ADMIN") {
-              //   navigate("/admin");
-              // }
             })
             .catch((error) => {
               console.log(error);

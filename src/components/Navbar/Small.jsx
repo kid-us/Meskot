@@ -4,17 +4,22 @@ import { Link } from "react-router-dom";
 import { dropdown } from "../../constant/dropdown";
 import { navbar } from "../../constant/navbar";
 import { useAuth } from "../../context/Auth";
-const Small = ({ user }) => {
+import Notification from "./Notification";
+
+const Small = ({ user, notification }) => {
   const { logout } = useAuth();
 
   const [dropdownClick, setDropdownClick] = useState(false);
+  const [notificationClick, setNotificationClick] = useState(false);
+  // Dropdown
   const handleDropdown = () => {
     setDropdownClick(!dropdownClick);
   };
-
+  // Logout
   const handleLogout = () => {
     logout();
   };
+
   return (
     <>
       <div className="container-fluid pt-2">
@@ -32,7 +37,19 @@ const Small = ({ user }) => {
           <div className="col-8">
             {user ? (
               <div className="row justify-content-end ">
-                <div className="col-lg-1 col-md-4 col-6 text-end">
+                <div className="col-lg-1 col-md-4 col-6 text-end position-relative">
+                  <p
+                    onClick={() => setNotificationClick(!notificationClick)}
+                    className={`${
+                      user && user.User_Type === "traveler"
+                        ? "travelers-text"
+                        : "buyers-text"
+                    } cursor fw-semibold bi-bell-fill fs-3`}
+                  >
+                    <span className="position-absolute top-0 start-75 ms-3 translate-middle badge rounded-pill bg-danger small"></span>
+                  </p>
+                </div>
+                <div className="col-lg-1 col-md-4 col-2 text-end">
                   <p
                     onClick={() => handleDropdown()}
                     className={`${
@@ -62,7 +79,7 @@ const Small = ({ user }) => {
           </div>
         </div>
       </div>
-
+      {/* Menu Bar */}
       {dropdownClick && (
         <div
           className={`menu bg-white fw-semibold animate__animated animate__fadeInDown mt-3 pt-4 px-3`}
@@ -96,6 +113,10 @@ const Small = ({ user }) => {
             </Link>
           </div>
         </div>
+      )}
+      {/* Notification */}
+      {notificationClick && (
+        <Notification notification={notification}></Notification>
       )}
     </>
   );

@@ -123,7 +123,7 @@ const TravelerDashboard = ({ window, approve }) => {
                     <div
                       className={`${
                         approve
-                          ? "col-lg-1 col-md-2 col-5"
+                          ? "col-lg-1 col-md-2 col-4"
                           : "col-lg-2 col-md-2 col-6"
                       }  pt-4`}
                     >

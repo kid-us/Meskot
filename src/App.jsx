@@ -19,11 +19,11 @@ import PostOrder from "./components/Order/PostOrders";
 import EmailVerify from "./components/Pages/EmailVerify";
 import PostWindow from "./components/Window/PostWindow";
 import WindowInfo from "./components/Window/WindowInfo";
-import Demo from "./components/Order/Demo";
 import Dash from "./components/Admin/Dash";
 import PostBlog from "./components/Blog/PostBlog";
 import Blog from "./components/Pages/Blog";
 import BlogView from "./components/Blog/BlogView";
+import AboutUs from "./components/Pages/AboutUs";
 
 function App() {
   return (
@@ -132,7 +132,6 @@ function App() {
               </Protect>
             }
           ></Route>
-          <Route path="/demo" exact element={<Demo></Demo>}></Route>
 
           {/* Admin */}
           <Route
@@ -153,7 +152,7 @@ function App() {
               </Protect>
             }
           ></Route>
-          <Route path="/demo" exact element={<Demo></Demo>}></Route>
+          <Route path="/about-us" exact element={<AboutUs></AboutUs>}></Route>
         </Routes>
       </AuthProvider>
     </>

@@ -116,8 +116,8 @@ option {
 .dropdown {
   position: fixed;
   border-radius: 3px;
-  right: 0;
-  top: 4.1em;
+  right: 5em;
+  top: 4.2em;
   width: 13%;
   line-height: 10px;
 }
@@ -164,6 +164,9 @@ option {
   .order-img-container {
     height: 130px;
   }
+  .banner-img {
+    width: 100% !important;
+  }
 }
 /* Medium Device */
 @media (min-width: 768px) {
@@ -176,6 +179,9 @@ option {
   .order-img-container {
     height: 200px;
   }
+  .banner-img-container {
+    height: 300px;
+  }
 }
 
 .order-img {
@@ -187,6 +193,19 @@ option {
 }
 
 .order-img:hover {
+  scale: 0.95;
+  transition: 0.5s;
+}
+
+.banner-img {
+  width: 75%;
+  aspect-ratio: 4/3;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  transition: 0.5s !important;
+}
+
+.banner-img:hover {
   scale: 0.95;
   transition: 0.5s;
 }

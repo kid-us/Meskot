@@ -30,7 +30,7 @@ const SignUpBuyers = () => {
   const [emailErrorMsg, setEmailErrorMsg] = useState(false);
 
   const isValid = isPhoneValid(phone);
-
+  // Country
   useEffect(() => {
     fetch(
       "https://valid.layercode.workers.dev/list/countries?format=select&flags=true&value=code"
@@ -41,7 +41,7 @@ const SignUpBuyers = () => {
         setSelectedCountry(data.userSelectValue);
       });
   }, []);
-
+  // Form
   const {
     register,
     handleSubmit,
@@ -56,7 +56,7 @@ const SignUpBuyers = () => {
       confirm_password: "",
     },
   });
-
+  // Form Submit
   const onSubmit = (data) => {
     const buyer = {
       User_Type: "buyer",
@@ -195,6 +195,7 @@ const SignUpBuyers = () => {
                     Date of birth required.
                   </p>
                 )}
+
                 <label
                   className="ms-1 text-secondary"
                   style={{ fontSize: "small" }}

@@ -120,7 +120,7 @@ const Dash = () => {
   };
 
   // Handle Filter
-  const handleFilter = (filterValue) => {
+  const handleFilter = () => {
     if (display === "order") {
       axios
         .get(`${request.baseUrl}api/filter/order?status=${filterBy}`, {
@@ -129,6 +129,7 @@ const Dash = () => {
           },
         })
         .then((response) => {
+          console.log(`${request.baseUrl}api/filter/order?status=${filterBy}`);
           if (response.data.results.length <= 0) {
             notify(`There is no orders in the status of ${filterBy}`);
           } else {
@@ -163,7 +164,7 @@ const Dash = () => {
       <Nav user={auth} logout={logout}></Nav>
       <div className="container-fluid mt-3 mb-4">
         <div className="row justify-content-end fw-semibold me-lg-5 my-3">
-          <div className="col-lg-1 col-md-3 col-4">
+          <div className="col-lg-1 col-md-3 col-3">
             <p
               onClick={() => setDisplay("order")}
               className={`cursor ${display === "order" && "text-secondary"}`}
@@ -171,7 +172,7 @@ const Dash = () => {
               Orders
             </p>
           </div>
-          <div className="col-lg-1 col-md-3 col-4">
+          <div className="col-lg-1 col-md-3 col-3">
             <p
               onClick={() => {
                 setDisplay("window"), setFilterBy("");
@@ -181,7 +182,7 @@ const Dash = () => {
               Windows
             </p>
           </div>
-          <div className="col-lg-1 col-md-3 col-4">
+          <div className="col-lg-1 col-md-3 col-3">
             <p
               onClick={() => setDisplay("blog")}
               className={`cursor ${display === "blog" && "text-secondary"}`}
@@ -189,17 +190,17 @@ const Dash = () => {
               Blog
             </p>
           </div>
-          <div className="col-lg-1 col-md-3 col-4">
+          <div className="col-lg-1 col-md-3 col-3">
             <Link to={"/admin/post-blog"} className="cursor">
               Post Blog
             </Link>
           </div>
         </div>
 
-        <div className="row justify-content-center pe-2">
+        <div className="row justify-content-center pe-lg-2">
           {/* Filter */}
           {display !== "blog" && (
-            <div className="col-2 fw-semibold ps-5">
+            <div className="col-lg-2 col-md-2 col-12 fw-semibold ps-5">
               <div className="row">
                 <div className="col-9">
                   <p className="fs-5">
@@ -222,7 +223,7 @@ const Dash = () => {
                       type="radio"
                       name="filter"
                       className="form-control-check cursor"
-                      onClick={() => setFilterBy("pending")}
+                      onClick={() => setFilterBy("Pending")}
                     />
                     <label
                       htmlFor={"pending"}
@@ -236,7 +237,7 @@ const Dash = () => {
                       type="radio"
                       name="filter"
                       className="form-control-check cursor"
-                      onClick={() => setFilterBy("approved")}
+                      onClick={() => setFilterBy("Approved")}
                     />
                     <label
                       htmlFor={"approved"}
@@ -250,7 +251,7 @@ const Dash = () => {
                       type="radio"
                       name="filter"
                       className="form-control-check cursor"
-                      onClick={() => setFilterBy("accepted")}
+                      onClick={() => setFilterBy("Accepted")}
                     />
                     <label
                       htmlFor={"accepted"}
@@ -264,10 +265,10 @@ const Dash = () => {
                       type="radio"
                       name="filter"
                       className="form-control-check cursor"
-                      onClick={() => setFilterBy("payed")}
+                      onClick={() => setFilterBy("Payed")}
                     />
                     <label
-                      htmlFor={"payed"}
+                      htmlFor={"Payed"}
                       className="ms-2 form-check-label cursor small text-uppercase"
                     >
                       Payed
@@ -278,7 +279,7 @@ const Dash = () => {
                       type="radio"
                       name="filter"
                       className="form-control-check cursor"
-                      onClick={() => setFilterBy("purchased")}
+                      onClick={() => setFilterBy("Purchased")}
                     />
                     <label
                       htmlFor={"purchased"}
@@ -292,7 +293,7 @@ const Dash = () => {
                       type="radio"
                       name="filter"
                       className="form-control-check cursor"
-                      onClick={() => setFilterBy("completed")}
+                      onClick={() => setFilterBy("Completed")}
                     />
                     <label
                       htmlFor={"completed"}
@@ -339,7 +340,11 @@ const Dash = () => {
             </div>
           )}
           {/* Display */}
-          <div className={`${display === "blog" ? "col-12" : "col-10"} `}>
+          <div
+            className={`${
+              display === "blog" ? "col-12" : "col-lg-10 col-md-10 col-12"
+            } `}
+          >
             {display === "order" ? (
               <>
                 {orders ? (

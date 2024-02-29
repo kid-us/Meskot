@@ -10,11 +10,11 @@ const Swiper = () => {
       </div>
       {/* Large */}
       <div className="d-none d-md-block d-lg-none">
-        <Slides slidesPerView={3}></Slides>
+        <Slides slidesPerView={2}></Slides>
       </div>
       {/* Small */}
       <div className="d-none d-lg-block">
-        <Slides slidesPerView={2}></Slides>
+        <Slides slidesPerView={1}></Slides>
       </div>
     </>
   );

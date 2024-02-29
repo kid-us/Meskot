@@ -77,7 +77,7 @@ const SignUpTravellers = () => {
     }
     if (isValid) {
       axios
-        .post("http://meskot.pythonanywhere.com/auth/users/", traveler, {
+        .post("https://meskot.pythonanywhere.com/auth/users/", traveler, {
           headers: {
             "Content-Type": "application/json",
           },

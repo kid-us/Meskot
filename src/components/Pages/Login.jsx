@@ -25,7 +25,7 @@ const Login = () => {
     };
 
     axios
-      .post("http://meskot.pythonanywhere.com/auth/jwt/create/meskot/", login, {
+      .post("https://meskot.pythonanywhere.com/auth/jwt/create/meskot/", login, {
         headers: {
           "Content-Type": "application/json",
         },

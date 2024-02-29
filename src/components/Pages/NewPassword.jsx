@@ -20,7 +20,7 @@ const NewPassword = () => {
     console.log(password);
     axios
       .post(
-        "http://meskot.pythonanywhere.com/auth/users/reset_password_confirm/",
+        "https://meskot.pythonanywhere.com/auth/users/reset_password_confirm/",
         password,
         {
           headers: {

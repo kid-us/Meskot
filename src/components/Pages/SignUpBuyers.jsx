@@ -77,7 +77,7 @@ const SignUpBuyers = () => {
     }
     if (isValid) {
       axios
-        .post("http://meskot.pythonanywhere.com/auth/users/", buyer, {
+        .post("https://meskot.pythonanywhere.com/auth/users/", buyer, {
           headers: {
             "Content-Type": "application/json",
           },

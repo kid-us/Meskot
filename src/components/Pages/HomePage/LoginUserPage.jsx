@@ -37,7 +37,7 @@ const LoginUserPage = ({ userData }) => {
       </div>
 
       <div className="container mt-5">
-        <p className="font-poppins fs-2">Our Products</p>
+        <p className="font-poppins fs-2 py-4">Our Products</p>
         <Swiper></Swiper>
 
         {/* <About></About> */}

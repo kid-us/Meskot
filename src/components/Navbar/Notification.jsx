@@ -12,7 +12,7 @@ const Notification = ({ notification }) => {
             >
               <div className="col-3">
                 <img
-                  src={`http://meskot.pythonanywhere.com${msg.upload_img}`}
+                  src={`https://meskot.pythonanywhere.com${msg.upload_img}`}
                   className="img-fluid"
                   alt="image"
                   width={"80px"}

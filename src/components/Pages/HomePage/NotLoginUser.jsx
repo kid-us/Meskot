@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import "../../../app.css";
 import NavBar from "../../NavBar";
 import Hero from "./Hero";
 import Footer from "../../Footer";
-import AboutUs from "../AboutUs";
+import About from "../../About/About";
 import axios from "axios";
 import { request } from "../../../constant/request";
 import { Link } from "react-router-dom";
 import Swiper from "../../Banners/Swiper";
+// import "../../../app.css";
 
 const NotLoginUser = () => {
   const [blogs, setBlogs] = useState();
@@ -90,7 +90,7 @@ const NotLoginUser = () => {
           </div>
         )}
       </div>
-      <AboutUs></AboutUs>
+      <About></About>
       <Footer></Footer>
     </>
   );

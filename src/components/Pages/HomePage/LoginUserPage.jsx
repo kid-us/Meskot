@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import "../../../app.css";
 import Hero from "./Hero";
 import NavBar from "../../NavBar";
 import Footer from "../../Footer";
 import axios from "axios";
 import { request } from "../../../constant/request";
 import { Link } from "react-router-dom";
-import AboutUs from "../AboutUs";
+import About from "../../About/About";
 import Swiper from "../../Banners/Swiper";
+import "../../../app.css";
 
 const LoginUserPage = ({ userData }) => {
   const [blogs, setBlogs] = useState();
@@ -92,7 +92,7 @@ const LoginUserPage = ({ userData }) => {
           </div>
         )}
       </div>
-      <AboutUs></AboutUs>
+      <About></About>
       <Footer></Footer>
     </>
   );

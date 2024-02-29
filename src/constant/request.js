@@ -1,5 +1,5 @@
 export const request = {
-  baseUrl: "http://meskot.pythonanywhere.com/",
-  jwtUrl: "http://meskot.pythonanywhere.com/auth/jwt/",
-  userUrl: "http://meskot.pythonanywhere.com/auth/users",
+  baseUrl: "https://meskot.pythonanywhere.com/",
+  jwtUrl: "https://meskot.pythonanywhere.com/auth/jwt/",
+  userUrl: "https://meskot.pythonanywhere.com/auth/users",
 };

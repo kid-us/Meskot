@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
 
       axios
         .post(
-          "http://meskot.pythonanywhere.com/auth/jwt/verify/",
+          "https://meskot.pythonanywhere.com/auth/jwt/verify/",
           verifyToken,
           {
             headers: {
@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }) => {
         .then((response) => {
           axios
             .get(
-              `http://meskot.pythonanywhere.com/auth/users/${decoded.user_id}/`,
+              `https://meskot.pythonanywhere.com/auth/users/${decoded.user_id}/`,
               {
                 headers: {
                   "Content-Type": "application/json",

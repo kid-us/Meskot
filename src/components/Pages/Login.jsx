@@ -25,11 +25,15 @@ const Login = () => {
     };
 
     axios
-      .post("https://meskot.pythonanywhere.com/auth/jwt/create/meskot/", login, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      .post(
+        "https://meskot.pythonanywhere.com/auth/jwt/create/meskot/",
+        login,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((response) => {
         localStorage.setItem("token", response.data.access);
         navigate("/");

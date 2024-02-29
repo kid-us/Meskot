@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { request } from "../../constant/request";
-import NavBar from "../NAvBar";
+import NavBar from "../NavBar";
 import Footer from "../Footer";
 import Loading from "../Loading/Loading";
 import ViewWindow from "./ViewWindow";

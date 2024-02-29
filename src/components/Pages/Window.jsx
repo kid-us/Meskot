@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../../context/Auth";
-import NavBar from "../NAvBar";
+import NavBar from "../NavBar";
 import Footer from "../Footer";
 import { Link } from "react-router-dom";
 import Loading from "../Loading/Loading";

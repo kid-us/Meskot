@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import NavBar from "../NAvBar";
+import NavBar from "../NavBar";
 import Footer from "../Footer";
 import OrderBy from "./OrderBy";
 import ViewOrder from "./ViewOrder";

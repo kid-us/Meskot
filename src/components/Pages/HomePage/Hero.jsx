@@ -6,7 +6,7 @@ const Hero = ({ signBtn }) => {
     <div className="container-fluid p-lg-5">
       <div className="row justify-content-center px-lg-4">
         <div className="col-lg-6 col-md-6 col-12 mt-5 pt-lg-4">
-          <h1 className="fw-semibold display-4">
+          <h1 className="fw-semibold display-4 py-lg-0 py-md-0 py-5">
             Launch or Scale your affiliate business
           </h1>
           <p className="mt-4 font-poppins py-4">

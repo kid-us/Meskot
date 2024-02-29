@@ -8,6 +8,7 @@ import Notification from "./Notification";
 
 const Small = ({ user, notification }) => {
   const { logout } = useAuth();
+  const [drop, setDrop] = useState(false);
 
   const [dropdownClick, setDropdownClick] = useState(false);
   const [notificationClick, setNotificationClick] = useState(false);
@@ -65,14 +66,12 @@ const Small = ({ user, notification }) => {
             ) : (
               <div className="row justify-content-end g-0">
                 <div className="col-8 text-end">
-                  <div className="text-end">
-                    <Link
-                      to={"/login"}
-                      className="nav-btn login-btn px-4 py-2 small text-light"
-                    >
-                      Sign Up
-                    </Link>
-                  </div>
+                  <p
+                    onClick={() => setDrop(!drop)}
+                    className={`small ${
+                      drop ? "bi-x-lg fs-4" : "bi-list fs-1"
+                    }   ms-1`}
+                  ></p>
                 </div>
               </div>
             )}
@@ -112,6 +111,32 @@ const Small = ({ user, notification }) => {
               <p className="ps-3 py-3 bi-power small">Logout</p>
             </Link>
           </div>
+        </div>
+      )}
+
+      {/* Not Login user menu */}
+      {drop && (
+        <div
+          className={`bg-white fw-semibold animate__animated animate__fadeInDown pt-3 px-3`}
+        >
+          <p>
+            <Link to={"/blog"} className="ms-1 fs-6 text-black">
+              Blog
+            </Link>
+          </p>
+          <p>
+            <Link to={"/about-us"} className="ms-1 fs-6 text-black">
+              About Us
+            </Link>
+          </p>
+          <p className="mt-4">
+            <Link
+              to={"/login"}
+              className="nav-btn login-btn px-5 ms-1 text-light"
+            >
+              Sign Up
+            </Link>
+          </p>
         </div>
       )}
       {/* Notification */}

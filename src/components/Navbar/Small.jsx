@@ -38,18 +38,20 @@ const Small = ({ user, notification }) => {
           <div className="col-8">
             {user ? (
               <div className="row justify-content-end ">
-                <div className="col-lg-1 col-md-4 col-6 text-end position-relative">
-                  <p
-                    onClick={() => setNotificationClick(!notificationClick)}
-                    className={`${
-                      user && user.User_Type === "traveler"
-                        ? "travelers-text"
-                        : "buyers-text"
-                    } cursor fw-semibold bi-bell-fill fs-3`}
-                  >
-                    <span className="position-absolute top-0 start-75 ms-3 translate-middle badge rounded-pill bg-danger small"></span>
-                  </p>
-                </div>
+                {notification.length > 0 && (
+                  <div className="col-lg-1 col-md-4 col-6 text-end position-relative">
+                    <p
+                      onClick={() => setNotificationClick(!notificationClick)}
+                      className={`${
+                        user && user.User_Type === "traveler"
+                          ? "travelers-text"
+                          : "buyers-text"
+                      } cursor fw-semibold bi-bell-fill fs-3`}
+                    >
+                      <span className="position-absolute top-0 start-75 ms-3 translate-middle badge rounded-pill bg-danger small"></span>
+                    </p>
+                  </div>
+                )}
                 <div className="col-lg-1 col-md-4 col-2 text-end">
                   <p
                     onClick={() => handleDropdown()}

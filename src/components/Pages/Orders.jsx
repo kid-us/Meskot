@@ -233,10 +233,10 @@ const Orders = () => {
             </div>
 
             <p
-              onClick={() => handleAllOrders}
-              className="cursor fw-semibold small"
+              onClick={() => handleAllOrders()}
+              className="cursor fw-semibold bi-check"
             >
-              All Orders
+              &nbsp; All Orders
             </p>
 
             <p className="font-poppins mt-3 bi-flag-fill"> Country</p>
@@ -336,10 +336,11 @@ const Orders = () => {
           </div>
 
           <p
-            onClick={() => handleAllOrders}
-            className="cursor fw-semibold small"
+            onClick={() => handleAllOrders()}
+            className="cursor fw-semibold bi-check
+"
           >
-            All Orders
+            &nbsp; All Orders
           </p>
 
           <p className="font-poppins mt-3 bi-flag-fill"> Country</p>

@@ -167,7 +167,7 @@ const Window = () => {
             </div>
             <p
               onClick={() => handleAllWindows()}
-              className="cursor fw-semibold"
+              className="cursor fw-semibold small"
             >
               All Windows
             </p>
@@ -275,6 +275,13 @@ const Window = () => {
               <p onClick={() => handleFilter()} className="bi-x-lg"></p>
             </div>
           </div>
+
+          <p
+            onClick={() => handleAllWindows()}
+            className="cursor fw-semibold small"
+          >
+            All Windows
+          </p>
 
           <p className="font-poppins mt-3 bi-flag-fill"> Country</p>
           <Select

@@ -10,12 +10,6 @@ const Protect = ({ children }) => {
   useEffect(() => {
     if (!token) {
       navigate("/");
-    } else {
-      if (auth.User_Type === "ADMIN") {
-        navigate("/admin");
-      } else {
-        navigate("/order");
-      }
     }
   }, [auth, navigate]);
 

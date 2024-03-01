@@ -62,6 +62,23 @@ const Orders = () => {
       });
   }, [auth]);
 
+  // Handle All Windows
+  const handleAllOrders = () => {
+    axios
+      .get(`${request.baseUrl}/api/order`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        setOrders(response.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   // Handle Range
   const handleRangeInput = (e) => {
     set_minValue(e.minValue);
@@ -310,6 +327,10 @@ const Orders = () => {
               <p onClick={() => handleFilter()} className="bi-x-lg"></p>
             </div>
           </div>
+
+          <p onClick={() => handleAllOrders} className="cursor fw-semibold">
+            All Orders
+          </p>
 
           <p className="font-poppins mt-3 bi-flag-fill"> Country</p>
 

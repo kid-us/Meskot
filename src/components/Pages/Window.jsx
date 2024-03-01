@@ -57,6 +57,24 @@ const Window = () => {
       });
   }, [auth]);
 
+  // Handle All Windows
+  const handleAllWindows = () => {
+    axios
+      .get(`${request.baseUrl}/api/window`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        setWindow(response.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(true);
+      });
+  };
+
   // Sorting
   const handleSorting = (sort) => {
     setSort(sort);
@@ -147,6 +165,12 @@ const Window = () => {
                 )}
               </div>
             </div>
+            <p
+              onClick={() => handleAllWindows()}
+              className="cursor fw-semibold"
+            >
+              All Windows
+            </p>
             <p className="font-poppins bi-flag-fill mt-4"> Country</p>
             <Select
               options={countries}

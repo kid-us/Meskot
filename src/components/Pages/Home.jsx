@@ -19,7 +19,6 @@ function App() {
   useEffect(() => {
     setUser(auth);
     if (auth) {
-      console.log(auth);
       if (auth.User_Type === "ADMIN") {
         navigate("/admin");
       } else {

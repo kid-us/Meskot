@@ -7,7 +7,7 @@ import BuyerDashboard from "../Dashboard/BuyerDashboard";
 import TravelerDashboard from "../Dashboard/TravelerDashboard";
 import Pagination from "../Pagination";
 import Footer from "../Footer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Blogs from "../Blog/Blogs";
@@ -16,9 +16,17 @@ const Dash = () => {
   const [window, setWindow] = useState();
   const [orders, setOrders] = useState();
   const [display, setDisplay] = useState("order");
+  const [filterBy, setFilterBy] = useState("");
+  //
   const { auth } = useAuth();
   const { logout } = useAuth();
-  const [filterBy, setFilterBy] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (auth.User_Type !== "ADMIN") {
+      navigate("/order");
+    }
+  });
 
   const notify = (msg) => {
     toast(`${msg} !`, {

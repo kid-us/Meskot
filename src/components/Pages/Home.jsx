@@ -21,6 +21,8 @@ function App() {
     if (auth) {
       if (auth.User_Type === "ADMIN") {
         navigate("/admin");
+      } else {
+        navigate("/order");
       }
 
       axios

@@ -11,7 +11,9 @@ const EmailVerify = () => {
     const token = searchParams.get("token");
     const uid = searchParams.get("uid");
     // http://localhost:5173/verify-email?token=UVI3bWtBZjJ2QzluV2Y5Zg&uid=c2a5y0-41239574a31dc71e3fa118b064d2d9bd
-    if (token && uid) {
+
+    //https://meskot-beta.vercel.app/verify-email?token=UVI3bWtBZjJ2QzluV2Y5Zg&uid=c2a5y0-41239574a31dc71e3fa118b064d2d9bd
+    https: if (token && uid) {
       const verify = {
         uid: uid,
         token: token,

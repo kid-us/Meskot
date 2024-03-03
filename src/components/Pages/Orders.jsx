@@ -48,7 +48,7 @@ const Orders = () => {
   useEffect(() => {
     setUser(auth);
     axios
-      .get(`${request.baseUrl}/api/order`, {
+      .get(`${request.baseUrl}api/filter/order?status=Approved`, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -64,19 +64,7 @@ const Orders = () => {
 
   // Handle All Windows
   const handleAllOrders = () => {
-    axios
-      .get(`${request.baseUrl}/api/order`, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then((response) => {
-        setOrders(response.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    location.reload();
   };
 
   // Handle Range
@@ -226,8 +214,10 @@ const Orders = () => {
                   countryChange === 1) && (
                   <button
                     onClick={() => filterOrders()}
-                    className="small bi-check-all border rounded buyers-bg text-white px-2 cursor"
-                  ></button>
+                    className="small border rounded buyers-bg text-white cursor fw-semibold py-1 px-3"
+                  >
+                    Apply
+                  </button>
                 )}
               </div>
             </div>
@@ -326,8 +316,10 @@ const Orders = () => {
                 maxValue < 5000) && (
                 <button
                   onClick={() => filterOrders()}
-                  className="small bi-check-all border rounded buyers-bg text-white px-2 cursor"
-                ></button>
+                  className="small border rounded buyers-bg text-white cursor fw-semibold py-1 px-3"
+                >
+                  Apply
+                </button>
               )}
             </div>
             <div className="col-3 text-end">

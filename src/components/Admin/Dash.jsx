@@ -11,6 +11,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Blogs from "../Blog/Blogs";
+import Navbar from "../NavBar";
 
 const Dash = () => {
   const [window, setWindow] = useState();
@@ -169,8 +170,9 @@ const Dash = () => {
 
   return (
     <div>
-      <Nav user={auth} logout={logout}></Nav>
-      <div className="container-fluid mt-3 mb-4">
+      <Navbar user={auth} logout={logout}></Navbar>
+
+      <div className="container-fluid mt-5 pt-4 mb-4">
         <div className="row justify-content-end fw-semibold me-lg-5 my-3">
           <div className="col-lg-1 col-md-3 col-3">
             <p
@@ -210,23 +212,31 @@ const Dash = () => {
           {display !== "blog" && (
             <div className="col-lg-2 col-md-2 col-12 fw-semibold ps-5">
               <div className="row">
-                <div className="col-9">
+                <div className="col-6">
                   <p className="fs-5">
                     <span className="bi-sliders"></span> Filter
                   </p>
                 </div>
-                <div className="col-1 mt-1">
+                <div className="col-2 mt-1">
                   {filterBy !== "" && (
                     <button
                       onClick={() => handleFilter()}
-                      className="small bi-check-all border rounded buyers-bg text-white px-2 cursor"
-                    ></button>
+                      className="small  border rounded buyers-bg text-white cursor p-1 px-3"
+                    >
+                      Apply
+                    </button>
                   )}
                 </div>
               </div>
               {display === "order" ? (
                 <>
                   <div className="lh-lg">
+                    <p
+                      className="lh-1 bi-check cursor"
+                      onClick={() => location.reload()}
+                    >
+                      All
+                    </p>
                     <input
                       type="radio"
                       name="filter"
@@ -314,6 +324,12 @@ const Dash = () => {
               ) : display === "window" ? (
                 <>
                   <div className="lh-lg">
+                    <p
+                      className="lh-1 bi-check cursor"
+                      onClick={() => location.reload()}
+                    >
+                      All
+                    </p>
                     <input
                       type="radio"
                       name="filter"
@@ -358,6 +374,7 @@ const Dash = () => {
                 {orders ? (
                   orders.results.length > 0 ? (
                     <>
+                      <p className="fw-semibold fs-5">Orders</p>
                       <BuyerDashboard
                         orders={orders}
                         approve={true}
@@ -369,7 +386,9 @@ const Dash = () => {
                       ></Pagination>
                     </>
                   ) : (
-                    ""
+                    <p className="my-5 p-5 bg-white fs-5 text-center">
+                      There is no Orders Yet.
+                    </p>
                   )
                 ) : (
                   ""
@@ -380,6 +399,7 @@ const Dash = () => {
                 {window ? (
                   window.results.length > 0 ? (
                     <>
+                      <p className="fw-semibold fs-5 ms-lg-5"> Windows</p>
                       <TravelerDashboard
                         window={window}
                         approve={true}
@@ -391,14 +411,19 @@ const Dash = () => {
                       ></Pagination>
                     </>
                   ) : (
-                    ""
+                    <p className="my-5 p-5 bg-white fs-5 text-center">
+                      There is no Windows Yet.
+                    </p>
                   )
                 ) : (
                   ""
                 )}
               </>
             ) : (
-              <Blogs edit={true} remove={true}></Blogs>
+              <>
+                <p className="fw-semibold fs-4 text-center">Blogs</p>
+                <Blogs edit={true} remove={true} url={"admin"}></Blogs>
+              </>
             )}
           </div>
         </div>

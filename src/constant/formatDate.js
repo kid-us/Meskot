@@ -21,10 +21,11 @@ function getFormattedDate(dateString) {
   const monthName = monthNames[date.getMonth()];
 
   // Get the day name
-  const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  const dayName = dayNames[date.getDay()];
+  // const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  // const dayName = dayNames[date.getDay()];
+  const dayNumber = date.getDate();
 
-  return `${dayName}-${monthName}-${year}`;
+  return `${dayNumber}-${monthName}-${year}`;
 }
 
 export default getFormattedDate;

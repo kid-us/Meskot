@@ -7,37 +7,14 @@ import axios from "axios";
 import { request } from "../../constant/request";
 import EditForm from "./EditForm";
 import EditStatus from "./EditStatus";
+import ConfirmDelete from "./ConfirmDelete";
 
 const BuyerDashboard = ({ orders, approve }) => {
   const [editedOrder, setEditedOrder] = useState();
   const [editBtnClicked, setEditBtnClicked] = useState(false);
   const [caretBtnClicked, setCaretBtnClicked] = useState(false);
   const [editedStatus, setEditedStatus] = useState();
-
-  const notify = (msg) => {
-    toast(`${msg} !`, {
-      position: "top-right",
-    });
-  };
-
-  // Handle Delete Order
-  const handleDeleteOrder = (order_id) => {
-    axios
-      .delete(`${request.baseUrl}api/order/${order_id}`, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then((response) => {
-        notify("Order Deleted Successfully!");
-        setTimeout(() => {
-          location.reload();
-        }, 2000);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  const [deleteData, setDeleteData] = useState("");
 
   // Handle Edit Order
   const handleEditBtn = (order_id) => {
@@ -155,7 +132,7 @@ const BuyerDashboard = ({ orders, approve }) => {
                 <div className="row ">
                   <div className="col-lg-3 col-2">
                     <p
-                      onClick={() => handleDeleteOrder(order.order_id)}
+                      onClick={() => setDeleteData(order.order_id)}
                       className="text-center cursor"
                     >
                       <span className="bg-danger bi-x-lg text-white p-2 rounded cursor"></span>
@@ -192,20 +169,28 @@ const BuyerDashboard = ({ orders, approve }) => {
       ) : (
         ""
       )}
-
+      {/* edit btn */}
       {editBtnClicked && (
         <EditForm
           editData={editedOrder}
           closeEditModal={() => closeModal()}
         ></EditForm>
       )}
-
+      {/* Caret */}
       {caretBtnClicked && (
         <EditStatus
           editData={editedStatus}
           closeStatusModal={() => closeModal()}
           user={"buyer"}
         ></EditStatus>
+      )}
+      {/* Delete Confirm */}
+      {deleteData !== "" && (
+        <ConfirmDelete
+          deleteItem={"order"}
+          deleteData={deleteData}
+          closeDeleteConfirm={() => setDeleteData("")}
+        ></ConfirmDelete>
       )}
     </>
   );

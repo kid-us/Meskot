@@ -13,9 +13,14 @@ const Dashboard = () => {
   const [orders, setOrders] = useState();
   const [window, setWindow] = useState();
   const [loading, setLoading] = useState(true);
+  const [display, setDisplay] = useState("All");
+  // const [pending, setPending] = useState();
+  // const [approved, setApproved] = useState();
+  // const [accepted, setAccepted] = useState();
+  // const [payed, setPayed] = useState();
+  // const [purchased, setPurchased] = useState();
+  // const [completed, setCompleted] = useState();
 
-  // const [filter, setFilter] = useState("All");
-  // const [filterClicked, setFilterClicked] = useState(false);
   const { auth } = useAuth();
 
   useEffect(() => {
@@ -29,6 +34,7 @@ const Dashboard = () => {
         })
         .then((response) => {
           setOrders(response.data);
+
           setLoading(false);
         })
         .catch((error) => {
@@ -51,15 +57,22 @@ const Dashboard = () => {
     }
   }, []);
 
-  // const handleFilters = (status) => {
-  //   setFilterClicked(false);
-  //   if (orders) {
-  //     const filtered = orders.results.filter(
-  //       (result) => result.status === status
-  //     );
-  //     setOrders({ ...orders, request: filtered });
-  //   }
-  // };
+  const handleChange = (event) => {
+    let stat = event.target.value;
+    setDisplay(stat);
+    let filter = orders.results.filter(
+      (item) => item.status.trim() === `${stat}`
+    );
+
+    let data = {
+      count: filter.length,
+      next: null,
+      previous: null,
+      results: filter,
+    };
+
+    setOrders(data);
+  };
 
   return (
     <>
@@ -68,95 +81,96 @@ const Dashboard = () => {
       <div className="container mt-5 pt-4 fw-semibold">
         {user && user.User_Type === "buyer" ? (
           <div>
-            {/* <div className="row justify-content-between">
-              <div className="col-10 ">
-                <p>Filter</p>
+            <div>
+              <p className="my-2 pb-3 pt-3">
+                Welcome
+                <span className="buyers-bg rounded px-4 text-white p-1">
+                  {user.name}
+                </span>
+                &nbsp; this is your dashboard you can manage your orders here
+              </p>
+              <div className="row justify-content-between">
+                <div className="col-lg-4 col-6">
+                  <p className="pb-2 fs-5 bi-hash">
+                    &nbsp;
+                    {display === "All" ? "All Orders" : display}
+                  </p>
+                </div>
+                <div className="col-lg-2 col-6 text-end">
+                  <select className="form-select" onChange={handleChange}>
+                    <option value="All">All</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Approved">Approved</option>
+                    <option value="Accepted">Accepted</option>
+                    <option value="Payed">Payed</option>
+                    <option value="Purchased">Purchased</option>
+                    <option value="Completed">Completed</option>
+                  </select>
+                </div>
               </div>
-              <div className="position-relative col-2 text-end">
-                <p
-                  className="cursor text-uppercase"
-                  onClick={() => setFilterClicked(!filterClicked)}
-                >
-                  {filter}
-                  <span
-                    className={`${
-                      filterClicked ? "bi-caret-up-fill" : "bi-caret-down-fill"
-                    } ms-3`}
-                  ></span>
-                </p>
-                {filterClicked && (
-                  <div
-                    className={`position-absolute mt-2 buyers-bg text-white small w-75 ms-5 px-4 pt-3 rounded shadow text-start`}
-                    style={{ lineHeight: "12px" }}
-                  >
-                    <p
-                      onClick={() => handleFilters("All")}
-                      className="cursor text-uppercase small"
-                    >
-                      All
-                    </p>
-                    <p
-                      onClick={() => handleFilters("Pending")}
-                      className="cursor text-uppercase small"
-                    >
-                      Pending
-                    </p>
-                    <p
-                      onClick={() => handleFilters("Approved")}
-                      className="cursor text-uppercase small"
-                    >
-                      Approved
-                    </p>
-                    <p
-                      onClick={() => handleFilters("Accepted")}
-                      className="cursor text-uppercase small"
-                    >
-                      Accepted
-                    </p>
-                    <p
-                      onClick={() => handleFilters("Payed")}
-                      className="cursor text-uppercase small"
-                    >
-                      Payed
-                    </p>
-                    <p
-                      onClick={() => handleFilters("Purchased")}
-                      className="cursor text-uppercase small"
-                    >
-                      Purchased
-                    </p>
-                    <p
-                      onClick={() => handleFilters("Completed")}
-                      className="cursor text-uppercase small"
-                    >
-                      Completed
-                    </p>
-                  </div>
-                )}
-              </div>
-            </div> */}
+            </div>
             {orders ? (
               orders.results.length > 0 ? (
-                <BuyerDashboard orders={orders}></BuyerDashboard>
+                <>
+                  <BuyerDashboard orders={orders}></BuyerDashboard>
+                </>
               ) : (
-                ""
+                <p className="my-5 p-5 bg-white fs-5 text-center">
+                  There is no Orders under this "{display}" Status
+                </p>
               )
             ) : (
               ""
             )}
           </div>
         ) : (
-          <div className="mt-2">
-            {window ? (
-              window.results.length > 0 ? (
-                <TravelerDashboard window={window}></TravelerDashboard>
+          user && (
+            <div className="mt-2">
+              <div>
+                <p className="my-2 pb-3">
+                  Welcome
+                  <span className="buyers-bg rounded px-4 text-white p-1">
+                    {user.name}
+                  </span>
+                  &nbsp; this is your dashboard you can manage your windows here
+                </p>
+                <div className="row justify-content-between">
+                  <div className="col-lg-4 col-6">
+                    <p className="mt-3 pb-2 fs-5 bi-hash">
+                      &nbsp;
+                      {display === "All" ? "All of your Orders" : display}
+                    </p>
+                  </div>
+                  <div className="col-lg-2 col-6 text-end">
+                    <select className="form-select" onChange={handleChange}>
+                      <option value="All">All</option>
+                      <option value="Pending">Pending</option>
+                      <option value="Approved">Approved</option>
+                      {user.User_Type === "buyer" && (
+                        <>
+                          <option value="Accepted">Accepted</option>
+                          <option value="Payed">Payed</option>
+                          <option value="Purchased">Purchased</option>
+                          <option value="Completed">Completed</option>
+                        </>
+                      )}
+                    </select>
+                  </div>
+                </div>
+              </div>
+              {window ? (
+                window.results.length > 0 ? (
+                  <TravelerDashboard window={window}></TravelerDashboard>
+                ) : (
+                  <p className="my-5 p-5 bg-white fs-5 text-center">
+                    There is no Windows under this "{display}" Status
+                  </p>
+                )
               ) : (
                 ""
-              )
-            ) : (
-              ""
-            )}
-          </div>
+              )}
+            </div>
+          )
         )}
       </div>
       <Footer></Footer>

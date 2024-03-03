@@ -42,7 +42,7 @@ const Window = () => {
     setUser(auth);
     setLoading(false);
     axios
-      .get(`${request.baseUrl}/api/window`, {
+      .get(`${request.baseUrl}/api/admin/window/approved`, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -160,8 +160,10 @@ const Window = () => {
                 {(countryChange === 1 || sort !== "") && (
                   <button
                     onClick={() => filterOrders()}
-                    className="small bi-check-all border rounded buyers-bg text-white px-2 cursor"
-                  ></button>
+                    className="small border rounded buyers-bg text-white cursor fw-semibold px-3 py-1"
+                  >
+                    Apply
+                  </button>
                 )}
               </div>
             </div>
@@ -267,8 +269,10 @@ const Window = () => {
               {(countryChange === 1 || sort !== "") && (
                 <button
                   onClick={() => filterOrders()}
-                  className="small bi-check-all border rounded buyers-bg text-white px-2 cursor"
-                ></button>
+                  className="small border rounded buyers-bg text-white cursor fw-semibold py-1 px-3"
+                >
+                  Apply
+                </button>
               )}
             </div>
             <div className="col-3 text-end">

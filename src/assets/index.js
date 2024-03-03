@@ -15,6 +15,7 @@ import i10 from "./order/10.png";
 import i11 from "./order/11.png";
 import i12 from "./order/12.png";
 import i13 from "./order/13.png";
+import about from "./about.jpg";
 
 export {
   logo,
@@ -34,4 +35,5 @@ export {
   i11,
   i12,
   i13,
+  about,
 };

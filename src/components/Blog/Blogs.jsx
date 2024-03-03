@@ -8,7 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import EditBlog from "./EditBlog";
 
-const Blogs = ({ edit, remove }) => {
+const Blogs = ({ edit, remove, url }) => {
   const [blogs, setBlogs] = useState();
   const [loading, setLoading] = useState(true);
   const [editClicked, setEditClicked] = useState(false);
@@ -169,9 +169,11 @@ const Blogs = ({ edit, remove }) => {
             : ""}
 
           <Pagination
-            comingTo="blog"
+            comingTo={"blog"}
             onPagination={() => handlePagination()}
             data={blogs}
+            edit={edit && edit}
+            remove={remove && remove}
           ></Pagination>
         </div>
       </div>

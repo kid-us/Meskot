@@ -5,6 +5,8 @@ import { dropdown } from "../../constant/dropdown";
 import { navbar } from "../../constant/navbar";
 import { useAuth } from "../../context/Auth";
 import Notification from "./Notification";
+import axios from "axios";
+import { request } from "../../constant/request";
 
 const Large = ({ user, notification }) => {
   const { logout } = useAuth();
@@ -19,6 +21,32 @@ const Large = ({ user, notification }) => {
   // Logout
   const handleLogout = () => {
     logout();
+  };
+
+  // handleNotification
+  const handleNotification = (notify) => {
+    console.log(notify);
+    // const notificationId = {
+    //   order_ids:
+    //   window_ids:
+    // }
+    // if (notificationClick) {
+    //   axios
+    //     .post(`${request.baseUrl}/api/delete/notification`, notificationId, {
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //     })
+    //     .then((response) => {
+    //       console.log(response);
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     });
+    //     setNotificationClick(false)
+    // }else{
+    //   setNotificationClick(true)
+    // }
   };
 
   return (
@@ -38,6 +66,14 @@ const Large = ({ user, notification }) => {
           <div className="col-11">
             {user ? (
               <div className="row justify-content-end g-0 me-5">
+                {user.User_Type === "ADMIN" && (
+                  <div className="col-1 text-end">
+                    <Link className="text-black" to={"/admin"}>
+                      Admin
+                    </Link>
+                  </div>
+                )}
+
                 {navbar.map((navs, index) => (
                   <div key={index} className="col-1 text-end">
                     <Link className="text-black" to={navs.link}>
@@ -68,7 +104,7 @@ const Large = ({ user, notification }) => {
                 {notification.length > 0 && (
                   <div className="col-1 ps-5 position-relative">
                     <p
-                      onClick={() => setNotificationClick(!notificationClick)}
+                      onClick={() => handleNotification(notification)}
                       className="cursor bi-bell-fill buyers-text"
                     >
                       <span className="position-absolute top-0 start-75 ms-3 translate-middle badge rounded-pill bg-danger"></span>
@@ -105,22 +141,38 @@ const Large = ({ user, notification }) => {
       {/* Dropdown */}
       {dropdownClick && (
         <div className={`dropdown bg-white py-3 ps-4 shadow fw-semibold`}>
-          {dropdown.map((drop, index) => (
+          {user.User_Type === "ADMIN" ? (
             <Link
-              key={index}
-              onClick={drop.link === "/" && handleLogout}
-              to={drop.link}
+              onClick={handleLogout}
               className={`${
                 user.User_Type === "traveler" ? "travelers-text" : "buyers-text"
               } cursor`}
             >
-              <p key={index} className="mb-3">
-                <span className={drop.icon}></span>
-                &nbsp; &nbsp;
-                {drop.title}
+              <p className="mb-3">
+                <span className="bi-power"></span>
+                &nbsp; &nbsp; Logout
               </p>
             </Link>
-          ))}
+          ) : (
+            dropdown.map((drop, index) => (
+              <Link
+                key={index}
+                onClick={drop.link === "/" ? handleLogout : undefined}
+                to={drop.link}
+                className={`${
+                  user.User_Type === "traveler"
+                    ? "travelers-text"
+                    : "buyers-text"
+                } cursor`}
+              >
+                <p key={index} className="mb-3">
+                  <span className={drop.icon}></span>
+                  &nbsp; &nbsp;
+                  {drop.title}
+                </p>
+              </Link>
+            ))
+          )}
         </div>
       )}
 

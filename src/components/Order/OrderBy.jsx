@@ -4,11 +4,13 @@ import axios from "axios";
 import { request } from "../../constant/request";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 const OrderBy = ({ name, order_id }) => {
   const [user, setUser] = useState();
   const { auth } = useAuth();
   const [loadBtn, setLoadBtn] = useState(false);
+  const navigate = useNavigate();
 
   const notify = (msg) => {
     toast(`${msg} !`, {
@@ -30,9 +32,13 @@ const OrderBy = ({ name, order_id }) => {
       })
       .then((response) => {
         console.log(response);
-        notify(response.data.Msg);
+        setTimeout(() => {
+          notify("Order has accepted Successfully");
+          navigate("/order");
+        }, 2000);
       })
       .catch((error) => {
+        setLoadBtn(false);
         console.log(error);
       });
   };

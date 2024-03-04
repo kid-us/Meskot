@@ -84,7 +84,7 @@ const SignUpBuyers = () => {
           },
         })
         .then((response) => {
-          navigate("/login");
+          navigate("/verify-email");
         })
         .catch((error) => {
           setLoadBtn(false);

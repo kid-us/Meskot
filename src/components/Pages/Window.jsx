@@ -40,7 +40,6 @@ const Window = () => {
   // User
   useEffect(() => {
     setUser(auth);
-    setLoading(false);
     axios
       .get(`${request.baseUrl}/api/admin/window/approved`, {
         headers: {
@@ -98,7 +97,7 @@ const Window = () => {
   // Filter fetch function
   function fetchFilters(url) {
     axios
-      .get(`${request.baseUrl}api/filter/window?${url}`, {
+      .get(`${request.baseUrl}api/filter/window?status=Approved&${url}`, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -114,7 +113,6 @@ const Window = () => {
   return (
     <>
       {loading && <Loading></Loading>}
-
       <NavBar user={user}></NavBar>
 
       <div className="container-fluid px-lg-4 mt-5 pt-4">
@@ -133,7 +131,7 @@ const Window = () => {
           ></div>
 
           {user &&
-            (user.User_Type === "traveler" ? (
+            (user.User_Type.toLowerCase() === "traveler" ? (
               <div className="col-lg-2 col-6 mt-lg-3 mt-4 fw-semibold text-end pe-lg-5">
                 <Link
                   to={"/window/post-window"}
@@ -234,7 +232,7 @@ const Window = () => {
           {/* Window */}
           <div className="col-lg-10 col-md-10 col-12 px-lg-5 px-1 mb-4 mt-2">
             {window === "" && (
-              <div className="text-center mt-5">
+              <div className="text-center mt-5 bg-white rounded p-4">
                 <p className="fw-semibold fs-5">
                   There is no available Windows! Create your Traveler Account
                   and Post Windows!
@@ -246,7 +244,7 @@ const Window = () => {
                 <WindowFeed window={window}></WindowFeed>
               )
             ) : (
-              <div className="text-center mt-5">
+              <div className="text-center mt-5 bg-white rounded p-4">
                 <p className="fw-semibold fs-5">
                   There is no available Windows! Create your Traveler Account
                   and Post Windows!

@@ -151,12 +151,13 @@ const Orders = () => {
   // Filter fetch function
   function fetchFilters(url) {
     axios
-      .get(`${request.baseUrl}api/filter/order?${url}`, {
+      .get(`${request.baseUrl}api/filter/order?status=Approved&${url}`, {
         headers: {
           "Content-Type": "application/json",
         },
       })
       .then((response) => {
+        console.log(response.data);
         setOrders(response.data);
       })
       .catch((error) => {
@@ -273,7 +274,7 @@ const Orders = () => {
           {/* Products */}
           <div className="col-lg-10 col-md-10 col-12 px-lg-5 px-1 mb-4 mt-4">
             {orders === "" && (
-              <div className="text-center mt-5">
+              <div className="text-center mt-5 bg-white rounded p-4">
                 <p className="fw-semibold fs-5">
                   There is no available Orders! Create your Buyer Account and
                   Post Orders!
@@ -286,7 +287,7 @@ const Orders = () => {
                 <Products orders={orders}></Products>
               ) : (
                 <>
-                  <div className="text-center">
+                  <div className="text-center mt-5 bg-white rounded p-4">
                     <p className="fw-semibold fs-5">
                       There is no Available Orders! Create your Buyer Account
                       and Post one
@@ -309,7 +310,7 @@ const Orders = () => {
             <div className="col-7">
               <p className="fw-semibold fs-5">Filter Out By</p>
             </div>
-            <div className="offset-1 col-1 text-end">
+            <div className="offset-1 col-4">
               {(sizeFilter.length > 0 ||
                 objectFilter.length > 0 ||
                 minValue > 1 ||
@@ -322,7 +323,7 @@ const Orders = () => {
                 </button>
               )}
             </div>
-            <div className="col-3 text-end">
+            <div className="col-1 text-end">
               <p onClick={() => handleFilter()} className="bi-x-lg"></p>
             </div>
           </div>

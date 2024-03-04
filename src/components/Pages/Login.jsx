@@ -8,6 +8,8 @@ import axios from "axios";
 const Login = () => {
   const navigate = useNavigate();
   const [loginError, setLoginError] = useState(false);
+  const [loadBtn, setLoadBtn] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -24,6 +26,7 @@ const Login = () => {
       password: data.password,
     };
 
+    setLoadBtn(true);
     axios
       .post(
         "https://meskot.pythonanywhere.com/auth/jwt/create/meskot/",
@@ -40,6 +43,7 @@ const Login = () => {
       })
       .catch((error) => {
         setLoginError(true);
+        setLoadBtn(false);
         console.error(error);
       });
   };
@@ -100,12 +104,19 @@ const Login = () => {
                 <p className="text-end small my-4">
                   <Link to="/forgot-password">Forgot Password?</Link>
                 </p>
-                <button className="buyers-bg text-light btns w-100 px-1 py-2 fw-semibold mb-lg-4 mt-1">
-                  Sign In
-                </button>
+                {loadBtn ? (
+                  <p className="buyers-bg text-light btns text-center w-100 px-1 py-2 fw-semibold mb-lg-4 mt-1">
+                    <span className="spinner-border me-4 p-0 "></span>
+                  </p>
+                ) : (
+                  <button className="buyers-bg text-light btns w-100 px-1 py-2 fw-semibold mb-lg-4 mt-1 ">
+                    Sign In
+                  </button>
+                )}
+
                 <p className="small pt-lg-0 pt-3">
                   Don't have an account?
-                  <Link to={"/sign-up-buyers"}>Sign Up</Link>
+                  <Link to={"/sign-up-buyers"}>{""} Sign Up</Link>
                 </p>
               </form>
             </div>

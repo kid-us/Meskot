@@ -9,6 +9,7 @@ import axios from "axios";
 import { request } from "../../constant/request";
 
 const Large = ({ user, notification }) => {
+  const { auth } = useAuth();
   const { logout } = useAuth();
 
   const [dropdownClick, setDropdownClick] = useState(false);
@@ -25,28 +26,28 @@ const Large = ({ user, notification }) => {
 
   // handleNotification
   const handleNotification = (notify) => {
-    console.log(notify);
-    // const notificationId = {
-    //   order_ids:
-    //   window_ids:
-    // }
-    // if (notificationClick) {
-    //   axios
-    //     .post(`${request.baseUrl}/api/delete/notification`, notificationId, {
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //     })
-    //     .then((response) => {
-    //       console.log(response);
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     });
-    //     setNotificationClick(false)
-    // }else{
-    //   setNotificationClick(true)
-    // }
+    const ids = notify.map((id) => id.order_id);
+    if (notificationClick) {
+      const notificationId = {
+        order_ids: auth.User_Type === "buyer" ? ids : [],
+        window_ids: auth.User_Type === "traveler" ? ids : [],
+      };
+      axios
+        .post(`${request.baseUrl}/api/delete/notification`, notificationId, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then((response) => {
+          location.reload();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      setNotificationClick(false);
+    } else {
+      setNotificationClick(true);
+    }
   };
 
   return (

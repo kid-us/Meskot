@@ -30,7 +30,6 @@ const windowInfo = () => {
               },
             })
             .then((response) => {
-              // console.log(response.data.name);
               setTraveler(response.data);
               setLoading(false);
             })

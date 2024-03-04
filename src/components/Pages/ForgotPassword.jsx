@@ -23,7 +23,6 @@ const ForgotPassword = () => {
       email: data.email,
     };
 
-    console.log(email);
     axios
       .post(
         "https://meskot.pythonanywhere.com/auth/users/reset_password/",

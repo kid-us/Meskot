@@ -49,7 +49,6 @@ const EditBlog = ({ blogId, closeBlogEdit }) => {
 
   // Form Submit
   const onSubmit = (data) => {
-    console.log(uploadImage);
     const postBlog = {
       title: data.title,
       body: data.body,
@@ -68,8 +67,6 @@ const EditBlog = ({ blogId, closeBlogEdit }) => {
         formData.append(key, value);
       });
 
-      console.log([...formData.entries()]);
-
       axios
         .patch(`${request.baseUrl}api/blog/${blogId}`, formData, {
           headers: {
@@ -77,7 +74,6 @@ const EditBlog = ({ blogId, closeBlogEdit }) => {
           },
         })
         .then((response) => {
-          console.log(response);
           notify("Blog edited Successfully!");
           setTimeout(() => {
             location.reload();

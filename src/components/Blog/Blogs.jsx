@@ -3,16 +3,21 @@ import axios from "axios";
 import { request } from "../../constant/request";
 import Loading from "../Loading/Loading";
 import Pagination from "../Pagination";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useAuth } from "../../context/Auth";
 import EditBlog from "./EditBlog";
+import "../../modals.css";
 
-const Blogs = ({ edit, remove, url }) => {
+const Blogs = () => {
   const [blogs, setBlogs] = useState();
   const [loading, setLoading] = useState(true);
   const [editClicked, setEditClicked] = useState(false);
   const [blogID, setBlogID] = useState("");
+  const [removeClicked, setRemoveClicked] = useState(false);
+  const { auth } = useAuth();
+  const navigate = useNavigate();
 
   const notify = (msg) => {
     toast(`${msg} !`, {
@@ -96,19 +101,28 @@ const Blogs = ({ edit, remove, url }) => {
     setEditClicked(true);
   };
 
+  // Delete Btn
+  const deleteBtn = (blogId) => {
+    setBlogID(blogId);
+    setRemoveClicked(true);
+  };
+
   //   Remove Blog
-  const removeBlog = (blogId) => {
+  const removeBlog = () => {
     axios
-      .delete(`${request.baseUrl}api/blog/${blogId}`, {
+      .delete(`${request.baseUrl}api/blog/${blogID}`, {
         headers: {
           "Content-Type": "application/json",
         },
       })
       .then((response) => {
-        notify("Blog removed successfully");
+        navigate("/blog");
+
         setTimeout(() => {
-          location.reload();
+          notify("Blog removed successfully");
         }, 2000);
+
+        setRemoveClicked(false);
       })
       .catch((error) => {
         console.log(error);
@@ -149,14 +163,14 @@ const Blogs = ({ edit, remove, url }) => {
                         </Link>
                       </div>
                       <div className="col-6 text-end">
-                        {edit && remove && (
+                        {auth && auth.User_Type === "ADMIN" && (
                           <>
                             <button
                               onClick={() => editBlog(blog.blog_id)}
                               className="btn bg-success bi-pen-fill text-white py-1 px-2"
                             ></button>
                             <button
-                              onClick={() => removeBlog(blog.blog_id)}
+                              onClick={() => deleteBtn(blog.blog_id)}
                               className="btn bg-danger ms-4 bi-x-lg text-white py-1 px-2"
                             ></button>
                           </>
@@ -172,8 +186,6 @@ const Blogs = ({ edit, remove, url }) => {
             comingTo={"blog"}
             onPagination={() => handlePagination()}
             data={blogs}
-            edit={edit && edit}
-            remove={remove && remove}
           ></Pagination>
         </div>
       </div>
@@ -183,6 +195,45 @@ const Blogs = ({ edit, remove, url }) => {
           blogId={blogID}
           closeBlogEdit={() => setEditClicked(false)}
         ></EditBlog>
+      )}
+
+      {removeClicked && (
+        <>
+          <div className="overlay"></div>
+          <div className="container">
+            <div className="confirm-modal">
+              <p className="fw-semibold text-end pt-2">
+                <span
+                  onClick={() => setRemoveClicked(false)}
+                  className="bi-x-lg pe-3 cursor"
+                ></span>
+              </p>
+              <p className="text-center fw-semibold">
+                Are you sure you want to delete this item? This action cannot be
+                undone.
+              </p>
+
+              <div className="row justify-content-center px-5 m-lg-4 m-3">
+                <div className="col-lg-4 col-6">
+                  <button
+                    onClick={() => setRemoveClicked(false)}
+                    className="btn p-1 px-4 bg-danger text-white"
+                  >
+                    Cancel
+                  </button>
+                </div>
+                <div className="col-lg-4 col-6">
+                  <button
+                    onClick={() => removeBlog()}
+                    className="btn p-1 px-4 bg-primary text-white"
+                  >
+                    Confirm
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
       )}
     </>
   );

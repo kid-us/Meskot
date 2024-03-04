@@ -6,11 +6,13 @@ import getFormattedDate from "../../constant/formatDate";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import EditStatus from "./EditStatus";
+import ConfirmDelete from "./ConfirmDelete";
 
 const TravelerDashboard = ({ window, approve }) => {
   const [feedWindow, setFeedWindow] = useState();
   const [caretBtnClicked, setCaretBtnClicked] = useState(false);
   const [editedWindow, setEditedWindow] = useState();
+  const [deleteData, setDeleteData] = useState("");
 
   const notify = (msg) => {
     toast(`${msg} !`, {
@@ -128,7 +130,7 @@ const TravelerDashboard = ({ window, approve }) => {
                       }  pt-4`}
                     >
                       <p
-                        onClick={() => handleCloseWindow(windows.window_id)}
+                        onClick={() => setDeleteData(windows.window_id)}
                         className="text-center cursor"
                       >
                         <span className="bg-danger bi-x-lg text-white p-2 rounded cursor"></span>
@@ -157,6 +159,14 @@ const TravelerDashboard = ({ window, approve }) => {
           closeStatusModal={() => closeModal()}
           user={"traveler"}
         ></EditStatus>
+      )}
+      {/* Delete Confirm */}
+      {deleteData !== "" && (
+        <ConfirmDelete
+          deleteItem={"traveler"}
+          deleteData={deleteData}
+          closeDeleteConfirm={() => setDeleteData("")}
+        ></ConfirmDelete>
       )}
     </>
   );

@@ -28,7 +28,7 @@ const SignUpBuyers = () => {
   const [phoneError, setPhoneError] = useState(false);
   const [phoneErrorMsg, setPhoneErrorMsg] = useState(false);
   const [emailErrorMsg, setEmailErrorMsg] = useState(false);
-
+  const [loadBtn, setLoadBtn] = useState(false);
   const isValid = isPhoneValid(phone);
   // Country
   useEffect(() => {
@@ -76,6 +76,7 @@ const SignUpBuyers = () => {
       return;
     }
     if (isValid) {
+      setLoadBtn(true);
       axios
         .post("https://meskot.pythonanywhere.com/auth/users/", buyer, {
           headers: {
@@ -86,6 +87,7 @@ const SignUpBuyers = () => {
           navigate("/login");
         })
         .catch((error) => {
+          setLoadBtn(false);
           console.log(error);
           if (error.response.data.email) {
             setEmailErrorMsg(true);
@@ -252,9 +254,15 @@ const SignUpBuyers = () => {
                     Password not match!
                   </p>
                 )}
-                <button className="buyers-bg text-light btns w-100 px-1 py-2 fw-semibold mb-lg-4 mt-4">
-                  Sign Up
-                </button>
+                {loadBtn ? (
+                  <p className="buyers-bg text-light btns text-center w-100 px-1 py-2 fw-semibold mb-lg-4 mt-4">
+                    <span className="spinner-border me-4 p-0 "></span>
+                  </p>
+                ) : (
+                  <button className="buyers-bg text-light btns w-100 px-1 py-2 fw-semibold mb-lg-4 mt-4">
+                    Sign Up
+                  </button>
+                )}
                 <p className="small pt-lg-0 pt-3">
                   Already have an account? <Link to={"/login"}>Sign In</Link>
                 </p>

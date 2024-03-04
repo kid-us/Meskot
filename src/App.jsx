@@ -19,11 +19,12 @@ import PostOrder from "./components/Order/PostOrders";
 import EmailVerify from "./components/Pages/EmailVerify";
 import PostWindow from "./components/Window/PostWindow";
 import WindowInfo from "./components/Window/WindowInfo";
-import Dash from "./components/Admin/Dash";
 import PostBlog from "./components/Blog/PostBlog";
 import Blog from "./components/Pages/Blog";
 import BlogView from "./components/Blog/BlogView";
 import AboutUs from "./components/Pages/AboutUs";
+import OrdersView from "./components/Admin/OrdersView";
+import WindowView from "./components/Admin/WindowView";
 
 function App() {
   return (
@@ -139,7 +140,27 @@ function App() {
             exact
             element={
               <Protect>
-                <Dash></Dash>
+                <OrdersView></OrdersView>
+              </Protect>
+            }
+          ></Route>
+
+          <Route
+            path="/admin/order"
+            exact
+            element={
+              <Protect>
+                <OrdersView></OrdersView>
+              </Protect>
+            }
+          ></Route>
+
+          <Route
+            path="/admin/window"
+            exact
+            element={
+              <Protect>
+                <WindowView></WindowView>
               </Protect>
             }
           ></Route>

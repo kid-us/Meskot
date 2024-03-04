@@ -21,6 +21,32 @@ const Small = ({ user, notification }) => {
     logout();
   };
 
+  // handleNotification
+  const handleNotification = (notify) => {
+    const ids = notify.map((id) => id.order_id);
+    if (notificationClick) {
+      const notificationId = {
+        order_ids: auth.User_Type === "buyer" ? ids : [],
+        window_ids: auth.User_Type === "traveler" ? ids : [],
+      };
+      axios
+        .post(`${request.baseUrl}/api/delete/notification`, notificationId, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then((response) => {
+          location.reload();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      setNotificationClick(false);
+    } else {
+      setNotificationClick(true);
+    }
+  };
+
   return (
     <>
       <div className="container-fluid pt-2">
@@ -41,7 +67,7 @@ const Small = ({ user, notification }) => {
                 {notification.length > 0 && (
                   <div className="col-lg-1 col-md-4 col-6 text-end position-relative">
                     <p
-                      onClick={() => setNotificationClick(!notificationClick)}
+                      onClick={() => handleNotification(notification)}
                       className={`${
                         user && user.User_Type === "traveler"
                           ? "travelers-text"

@@ -126,3 +126,16 @@ input::placeholder {
     z-index: 1100 !important;
   }
 }
+
+.spinner {
+  /* color: red !important; */
+  animation: button-anim 0.7s linear infinite;
+}
+@keyframes button-anim {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

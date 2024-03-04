@@ -7,20 +7,18 @@ import BuyerDashboard from "../Dashboard/BuyerDashboard";
 import TravelerDashboard from "../Dashboard/TravelerDashboard";
 import Footer from "../../components/Footer";
 import Loading from "../Loading/Loading";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const [user, setUser] = useState();
   const [orders, setOrders] = useState();
+  const [allOrders, setAllOrders] = useState();
   const [window, setWindow] = useState();
+  const [allWindows, setAllWindows] = useState();
   const [loading, setLoading] = useState(true);
   const [display, setDisplay] = useState("All");
-  // const [pending, setPending] = useState();
-  // const [approved, setApproved] = useState();
-  // const [accepted, setAccepted] = useState();
-  // const [payed, setPayed] = useState();
-  // const [purchased, setPurchased] = useState();
-  // const [completed, setCompleted] = useState();
 
+  const navigate = useNavigate();
   const { auth } = useAuth();
 
   useEffect(() => {
@@ -34,44 +32,70 @@ const Dashboard = () => {
         })
         .then((response) => {
           setOrders(response.data);
-
+          setAllOrders(response.data);
           setLoading(false);
         })
         .catch((error) => {
           console.log(error);
         });
-    } else {
+    } else if (auth.User_Type.toLowerCase() === "traveler") {
       axios
-        .get(`${request.baseUrl}api/filter/window?`, {
+        .get(`${request.baseUrl}api/traveler/window/${auth.id}`, {
           headers: {
             "Content-Type": "application/json",
           },
         })
         .then((response) => {
           setWindow(response.data);
+          setAllWindows(response.data);
           setLoading(false);
         })
         .catch((error) => {
           console.log(error);
         });
+    } else {
+      navigate("/admin");
     }
   }, []);
 
   const handleChange = (event) => {
     let stat = event.target.value;
     setDisplay(stat);
-    let filter = orders.results.filter(
-      (item) => item.status.trim() === `${stat}`
-    );
+    if (auth.User_Type === "buyer") {
+      if (stat === "All") {
+        setOrders(allOrders);
+        return;
+      }
+      let filter = allOrders.results.filter(
+        (item) => item.status.trim() === `${stat}`
+      );
 
-    let data = {
-      count: filter.length,
-      next: null,
-      previous: null,
-      results: filter,
-    };
+      let data = {
+        count: filter.length,
+        next: null,
+        previous: null,
+        results: filter,
+      };
+      setOrders(data);
+    } else if (auth.User_Type.toLowerCase() === "traveler") {
+      if (stat === "All") {
+        setWindow(allWindows);
+        return;
+      }
 
-    setOrders(data);
+      let filter = allWindows.results.filter(
+        (item) => item.status.trim() === `${stat}`
+      );
+
+      let data = {
+        count: filter.length,
+        next: null,
+        previous: null,
+        results: filter,
+      };
+
+      setWindow(data);
+    }
   };
 
   return (
@@ -83,7 +107,7 @@ const Dashboard = () => {
           <div>
             <div>
               <p className="my-2 pb-3 pt-3">
-                Welcome
+                Welcome {""}
                 <span className="buyers-bg rounded px-4 text-white p-1">
                   {user.name}
                 </span>
@@ -128,7 +152,7 @@ const Dashboard = () => {
             <div className="mt-2">
               <div>
                 <p className="my-2 pb-3">
-                  Welcome
+                  Welcome {""}
                   <span className="buyers-bg rounded px-4 text-white p-1">
                     {user.name}
                   </span>

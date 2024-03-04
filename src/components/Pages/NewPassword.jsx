@@ -16,8 +16,7 @@ const NewPassword = () => {
     },
   });
   const onSubmit = (data) => {
-    const password = data.email;
-    console.log(password);
+    const password = data.password;
     axios
       .post(
         "https://meskot.pythonanywhere.com/auth/users/reset_password_confirm/",
@@ -30,7 +29,7 @@ const NewPassword = () => {
       )
       .then((response) => {
         console.log(response);
-        // navigate("/login");
+        navigate("/login");
       })
       .catch((error) => {
         console.log(error);

@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const EditForm = ({ editData, closeStatusModal, user }) => {
   const [status, setStatus] = useState(editData.status);
+  const [loadBtn, setLoadBtn] = useState(false);
   const { auth } = useAuth();
 
   const notify = (msg) => {
@@ -24,6 +25,7 @@ const EditForm = ({ editData, closeStatusModal, user }) => {
     };
 
     if (user === "traveler") {
+      setLoadBtn(true);
       axios
         .patch(
           `${request.baseUrl}api/window/${editData.window_id}`,
@@ -44,6 +46,7 @@ const EditForm = ({ editData, closeStatusModal, user }) => {
           console.log(error);
         });
     } else if (user === "buyer") {
+      setLoadBtn(true);
       axios
         .patch(
           `${request.baseUrl}api/order/${editData.order_id}`,
@@ -61,6 +64,7 @@ const EditForm = ({ editData, closeStatusModal, user }) => {
           }, 2000);
         })
         .catch((error) => {
+          setLoadBtn(true);
           console.log(error);
         });
     }
@@ -121,12 +125,18 @@ const EditForm = ({ editData, closeStatusModal, user }) => {
               </div>
 
               <div className="col-12">
-                <button
-                  onClick={() => handleSubmit(event)}
-                  className="buyers-bg text-light btns w-100 px-1 py-2 fw-semibold mb-lg-4 mt-4"
-                >
-                  Change
-                </button>
+                {loadBtn ? (
+                  <p className="buyers-bg text-light btns text-center w-100 px-1 py-2 fw-semibold mb-lg-4 mt-4">
+                    <span className="spinner-border me-4 p-0 "></span>
+                  </p>
+                ) : (
+                  <button
+                    onClick={() => handleSubmit(event)}
+                    className="buyers-bg text-light btns w-100 px-1 py-2 fw-semibold mb-lg-4 mt-4"
+                  >
+                    Change
+                  </button>
+                )}
               </div>
             </div>
           </form>

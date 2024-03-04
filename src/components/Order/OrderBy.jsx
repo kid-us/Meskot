@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 const OrderBy = ({ name, order_id }) => {
   const [user, setUser] = useState();
   const { auth } = useAuth();
+  const [loadBtn, setLoadBtn] = useState(false);
 
   const notify = (msg) => {
     toast(`${msg} !`, {
@@ -20,6 +21,7 @@ const OrderBy = ({ name, order_id }) => {
   }, [auth]);
 
   const handleAcceptOrder = () => {
+    setLoadBtn(true);
     axios
       .get(`${request.baseUrl}api/accept_order/${order_id}/${auth.id}`, {
         headers: {
@@ -53,12 +55,18 @@ const OrderBy = ({ name, order_id }) => {
             </div>
             {user && user.User_Type === "traveler" ? (
               <div className="col-lg-2 col-6 text-end small mt-2">
-                <button
-                  onClick={() => handleAcceptOrder()}
-                  className="btns buyers-bg py-2 px-4 text-white"
-                >
-                  Accept Order
-                </button>
+                {loadBtn ? (
+                  <p className="btns buyers-bg py-2 px-4 text-center text-white">
+                    <span className="spinner-border me-4 p-0 "></span>
+                  </p>
+                ) : (
+                  <button
+                    onClick={() => handleAcceptOrder()}
+                    className="btns buyers-bg py-2 px-4 text-white"
+                  >
+                    Accept Order
+                  </button>
+                )}
               </div>
             ) : (
               <div className="col-lg-2 col-6 text-end small mt-2"></div>

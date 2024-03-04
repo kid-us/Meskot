@@ -86,7 +86,6 @@ const Profile = () => {
     );
 
     if (Object.keys(profileToSend).length > 0) {
-      // console.log(profileToSend);
       axios
         .patch(`${request.baseUrl}auth/update/${auth.id}/`, profileToSend, {
           headers: {

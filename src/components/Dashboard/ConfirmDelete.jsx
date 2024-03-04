@@ -12,10 +12,10 @@ const ConfirmDelete = ({ deleteItem, deleteData, closeDeleteConfirm }) => {
     });
   };
 
-  const handleDeleteOrder = (order_id) => {
+  const handleDeleteOrder = (id) => {
     if (deleteItem === "order") {
       axios
-        .delete(`${request.baseUrl}api/order/${order_id}`, {
+        .delete(`${request.baseUrl}api/order/${id}`, {
           headers: {
             "Content-Type": "application/json",
           },
@@ -31,7 +31,7 @@ const ConfirmDelete = ({ deleteItem, deleteData, closeDeleteConfirm }) => {
         });
     } else {
       axios
-        .get(`${request.baseUrl}api/close_window/${window_id}`, {
+        .get(`${request.baseUrl}api/close_window/${id}`, {
           headers: {
             "Content-Type": "application/json",
           },
@@ -57,10 +57,10 @@ const ConfirmDelete = ({ deleteItem, deleteData, closeDeleteConfirm }) => {
           <p className="fw-semibold text-end pt-2">
             <span
               onClick={() => closeDeleteConfirm()}
-              className="bi-x-lg pe-3"
+              className="bi-x-lg pe-3 cursor"
             ></span>
           </p>
-          <p className="text-center">
+          <p className="text-center fw-semibold">
             Are you sure you want to delete this item? This action cannot be
             undone.
           </p>

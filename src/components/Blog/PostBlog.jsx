@@ -1,25 +1,29 @@
 import React, { useState } from "react";
-import Nav from "../Admin/Nav";
 import { useAuth } from "../../context/Auth";
 import { useForm } from "react-hook-form";
 import Footer from "../Footer";
 import { ToastContainer, toast } from "react-toastify";
 import { request } from "../../constant/request";
 import axios from "axios";
+import NavBar from "../NavBar";
+import Links from "../Admin/Links";
 
 const PostBlog = () => {
   const { auth } = useAuth();
   const { logout } = useAuth();
+  const [uploadImage, setUploadImage] = useState();
+  const [descriptionError, setDescriptionError] = useState("");
+  const [loadBtn, setLoadBtn] = useState(false);
 
+  // Image
+  const handleImage = (event) => {
+    setUploadImage(event.target.files[0]);
+  };
   const notify = (msg) => {
     toast(`${msg} !`, {
       position: "top-right",
     });
   };
-
-  const [uploadImage, setUploadImage] = useState("");
-  const [descriptionError, setDescriptionError] = useState("");
-
   // Use Form
   const {
     register,
@@ -44,7 +48,7 @@ const PostBlog = () => {
 
     const formData = new FormData();
 
-    if (uploadImage === "") {
+    if (uploadImage === undefined) {
       setUploadImage(null);
       return;
     } else if (uploadImage !== "" && uploadImage !== null) {
@@ -53,7 +57,7 @@ const PostBlog = () => {
         formData.append(key, value);
       });
 
-      // console.log([...formData.entries()]);
+      setLoadBtn(true);
 
       axios
         .post(`${request.baseUrl}api/blog/`, formData, {
@@ -68,6 +72,7 @@ const PostBlog = () => {
           }, 2000);
         })
         .catch((error) => {
+          setLoadBtn(false);
           console.log(error);
           if (error.response.data.short_description) {
             setDescriptionError(
@@ -78,18 +83,14 @@ const PostBlog = () => {
     }
   };
 
-  // Image
-  const handleImage = (event) => {
-    setUploadImage(event.target.files[0]);
-  };
-
   return (
     <>
-      <Nav user={auth} logout={logout}></Nav>
+      <NavBar user={auth} logout={logout}></NavBar>
       <ToastContainer theme="dark" className="mt-5" />
 
-      <div className="container mt-4 fw-semibold mb-3">
-        <div className="row justify-content-center">
+      <div className="container mt-5 pt-4 fw-semibold mb-3">
+        <Links activeAt={"post-blog"}></Links>
+        <div className="row justify-content-center mt-4">
           <div className="col-lg-6 col-md-8 col-12 bg-white  rounded  p-5">
             <p className="fs-5">Post Blogs</p>
             <form
@@ -186,9 +187,15 @@ const PostBlog = () => {
                   {descriptionError}
                 </p>
               )}
-              <button className="buyers-bg text-light btns w-100 px-1 py-2 fw-semibold mb-lg-4 mt-4">
-                Submit
-              </button>
+              {loadBtn ? (
+                <p className="buyers-bg text-light text-center btns w-100 px-1 py-2 fw-semibold mb-lg-4 mt-4">
+                  <span className="spinner-border me-4 p-0 "></span>
+                </p>
+              ) : (
+                <button className="buyers-bg text-light btns w-100 px-1 py-2 fw-semibold mb-lg-4 mt-4">
+                  Submit
+                </button>
+              )}
             </form>
           </div>
         </div>

@@ -12,9 +12,8 @@ const PostWindow = () => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     if (auth) {
-      if (auth.User_Type !== "traveler") {
+      if (auth.User_Type.toLowerCase() !== "traveler") {
         navigate("/order");
-        console.log(auth);
       } else {
         setLoading(false);
       }

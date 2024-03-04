@@ -23,6 +23,8 @@ const EditForm = ({ editData, closeEditModal }) => {
   const [descriptionError, setDescriptionError] = useState("");
   const [countries, setCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState({});
+  const [loadBtn, setLoadBtn] = useState(false);
+
   // Image
   const handleImage = (event) => {
     setUploadImage(event.target.files[0]);
@@ -67,6 +69,7 @@ const EditForm = ({ editData, closeEditModal }) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
+      name: "",
       price: "",
       weight: "",
       description: "",
@@ -79,7 +82,7 @@ const EditForm = ({ editData, closeEditModal }) => {
   const onSubmit = (data) => {
     const postOrder = {
       country: selectedCountry.value,
-      object_name: objName,
+      object_name: data.name,
       url: data.url,
       price: data.price,
       quantity: data.quantity,
@@ -91,12 +94,7 @@ const EditForm = ({ editData, closeEditModal }) => {
     };
 
     const formData = new FormData();
-    if (objName.length < 2 && objName === "") {
-      setObjName("");
-      return;
-    }
-
-    if (uploadImage === "") {
+    if (uploadImage === undefined) {
       setUploadImage(null);
     } else if (uploadImage !== "" && uploadImage !== null) {
       formData.append("upload_img", uploadImage);
@@ -104,8 +102,7 @@ const EditForm = ({ editData, closeEditModal }) => {
         formData.append(key, value);
       });
 
-      // console.log([...formData.entries()]);
-
+      setLoadBtn(true);
       axios
         .patch(`${request.baseUrl}api/order/${editData.order_id}`, formData, {
           headers: {
@@ -119,6 +116,7 @@ const EditForm = ({ editData, closeEditModal }) => {
           }, 2000);
         })
         .catch((error) => {
+          setLoadBtn(true);
           console.log(error);
         });
     }
@@ -153,19 +151,30 @@ const EditForm = ({ editData, closeEditModal }) => {
               </label>
               <input
                 type="text"
-                minLength="3"
                 placeholder={editData.object_name}
-                onInput={(e) => setObjName(e.target.value)}
                 className={`form-control border border-secondary mb-3 fs-6 fw-semibold py-2 ${
-                  objName === "" && "border border-danger border-2"
+                  errors.name && "border border-danger border-2"
                 }`}
+                {...register("name", {
+                  required: true,
+                  minLength: 3,
+                })}
               />
-              {objName === "" && (
-                <p role="alert" className="small-text lh-sm ms-1">
+              {errors.url && (
+                <p
+                  role="alert"
+                  className="ms-1"
+                  style={{
+                    lineHeight: "13px",
+                    fontSize: "10px",
+                    color: "red",
+                  }}
+                >
                   Object name required and Name must be greater than 2 chars.
                 </p>
               )}
             </div>
+
             <div className="col-lg-4 col-md-4 col-12">
               <label
                 className="ms-1 mb-1 text-secondary"
@@ -411,9 +420,15 @@ const EditForm = ({ editData, closeEditModal }) => {
             </div>
             <div className="col-lg-1"></div>
             <div className="col-lg-4 col-md-4 col-12 mt-lg-5 pt-lg-5 pb-4">
-              <button className="buyers-bg text-light btns w-100 px-1 py-2 fw-semibold mb-lg-4 mt-4">
-                Submit
-              </button>
+              {loadBtn ? (
+                <p className="buyers-bg text-light btns text-center w-100 px-1 py-2 fw-semibold mb-lg-4 mt-4">
+                  <span className="spinner-border me-4 p-0 "></span>
+                </p>
+              ) : (
+                <button className="buyers-bg text-light btns w-100 px-1 py-2 fw-semibold mb-lg-4 mt-4">
+                  Submit
+                </button>
+              )}
             </div>
           </div>
         </form>

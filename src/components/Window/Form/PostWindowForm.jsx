@@ -19,6 +19,7 @@ const PostWindowForm = () => {
   const [uploadImage, setUploadImage] = useState();
   const [countries, setCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState({});
+  const [loadButton, setLoadButton] = useState(false);
 
   // Country
   useEffect(() => {
@@ -57,30 +58,32 @@ const PostWindowForm = () => {
 
     const formData = new FormData();
 
-    if (uploadImage === "") {
+    if (uploadImage === undefined) {
       setUploadImage(null);
+      return;
     } else if (uploadImage !== "" && uploadImage !== null) {
       formData.append("upload_img", uploadImage);
       Object.entries(postWindow).forEach(([key, value]) => {
         formData.append(key, value);
       });
-    }
 
-    axios
-      .post(`${request.baseUrl}api/window`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-      .then((response) => {
-        notify("Window Posted Successfully!");
-        setTimeout(() => {
-          navigate("/window");
-        }, 3000);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      setLoadButton(true);
+      axios
+        .post(`${request.baseUrl}api/window`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((response) => {
+          notify("Window Posted Successfully!");
+          setTimeout(() => {
+            navigate("/window");
+          }, 3000);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
   return (
     <>
@@ -150,9 +153,15 @@ const PostWindowForm = () => {
                   </p>
                 )}
 
-                <button className="travelers-bg text-light btns w-100 px-1 py-2 fw-semibold mb-lg-4 mt-4">
-                  Submit
-                </button>
+                {loadButton ? (
+                  <p className="travelers-bg text-light btns text-center w-100 px-1 py-2 fw-semibold mb-lg-4 mt-4">
+                    <span className="spinner-border me-4 p-0 "></span>
+                  </p>
+                ) : (
+                  <button className="travelers-bg text-light btns w-100 px-1 py-2 fw-semibold mb-lg-4 mt-4">
+                    Submit
+                  </button>
+                )}
               </form>
             </div>
           </div>

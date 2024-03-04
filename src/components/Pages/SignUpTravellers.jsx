@@ -28,6 +28,7 @@ const SignUpTravellers = () => {
   const [phoneError, setPhoneError] = useState(false);
   const [phoneErrorMsg, setPhoneErrorMsg] = useState(false);
   const [emailErrorMsg, setEmailErrorMsg] = useState(false);
+  const [loadBtn, setLoadBtn] = useState(false);
 
   const isValid = isPhoneValid(phone);
 
@@ -76,6 +77,7 @@ const SignUpTravellers = () => {
       return;
     }
     if (isValid) {
+      setLoadBtn(true);
       axios
         .post("https://meskot.pythonanywhere.com/auth/users/", traveler, {
           headers: {
@@ -86,6 +88,7 @@ const SignUpTravellers = () => {
           navigate("/verify-email");
         })
         .catch((error) => {
+          setLoadBtn(false);
           console.log(error);
           if (error.response.data.email) {
             setEmailErrorMsg(true);
@@ -257,9 +260,15 @@ const SignUpTravellers = () => {
                     Password not match!
                   </p>
                 )}
-                <button className="travelers-bg text-light btns w-100 px-1 py-2 fw-semibold mb-lg-4 mt-4">
-                  Sign Up
-                </button>
+                {loadBtn ? (
+                  <p className="travelers-bg text-light text-center btns w-100 px-1 py-2 fw-semibold mb-lg-4 mt-4">
+                    <span className="spinner-border me-4 p-0 "></span>
+                  </p>
+                ) : (
+                  <button className="travelers-bg text-light btns w-100 px-1 py-2 fw-semibold mb-lg-4 mt-4">
+                    Sign Up
+                  </button>
+                )}
                 <p className="small pt-lg-0 pt-3">
                   Already have an account? <Link to={"/login"}>Sign In</Link>
                 </p>

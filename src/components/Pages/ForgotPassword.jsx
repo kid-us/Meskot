@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import "../../accounts.css";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logo2 } from "../../assets";
 import axios from "axios";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
   const [invalidEmailMsg, setInvalidEmailMsg] = useState(false);
+  const [infoMsg, setInfoMsg] = useState(false);
+  const [email, setEmail] = useState();
+  const [loadBtn, setLoadBtn] = useState(false);
 
   const {
     register,
@@ -23,6 +26,8 @@ const ForgotPassword = () => {
       email: data.email,
     };
 
+    setLoadBtn(true);
+
     axios
       .post(
         "https://meskot.pythonanywhere.com/auth/users/reset_password/",
@@ -34,10 +39,11 @@ const ForgotPassword = () => {
         }
       )
       .then((response) => {
-        console.log(response);
-        navigate("/new-password");
+        setEmail(data.email);
+        setInfoMsg(true);
       })
       .catch((error) => {
+        setLoadBtn(false);
         console.log(error);
         setInvalidEmailMsg(true);
       });
@@ -51,6 +57,13 @@ const ForgotPassword = () => {
             <img src={logo2} alt="logo" width={"40px"} />
             <span className="ms-3 fs-4">Meskot</span>
           </div>
+          {infoMsg && (
+            <p className="bg-white rounded p-3">
+              We have sent password reset link to{" "}
+              <span className="bi-envelope text-primary "> {email}</span>{" "}
+              address.
+            </p>
+          )}
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="bg-white rounded p-3"
@@ -79,9 +92,19 @@ const ForgotPassword = () => {
               </p>
             )}
 
-            <button className="buyers-bg text-light btns w-100 px-1 py-3 fw-semibold mb-lg-4 mt-3">
-              Send Recovery Email
-            </button>
+            {loadBtn ? (
+              <p className="buyers-bg text-light text-center btns w-100 px-1 py-3 fw-semibold mb-lg-4 mt-3">
+                {infoMsg ? (
+                  <span className="bi-check-lg "></span>
+                ) : (
+                  <span className="spinner-border me-4 p-0 "></span>
+                )}
+              </p>
+            ) : (
+              <button className="buyers-bg text-light btns w-100 px-1 py-3 fw-semibold mb-lg-4 mt-3">
+                Send Recovery Email
+              </button>
+            )}
           </form>
         </div>
       </div>

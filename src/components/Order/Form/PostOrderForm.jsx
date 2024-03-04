@@ -11,11 +11,13 @@ import "react-toastify/dist/ReactToastify.css";
 const PostOrderForm = () => {
   const navigate = useNavigate();
   const { auth } = useAuth();
+
   const notify = (msg) => {
     toast(`${msg} !`, {
       position: "top-right",
     });
   };
+
   const [type, setType] = useState("shoes");
   const [quantity, setQuantity] = useState(3);
   const [size, setSize] = useState("very-small");

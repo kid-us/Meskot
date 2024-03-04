@@ -31,11 +31,10 @@ const OrderBy = ({ name, order_id }) => {
         },
       })
       .then((response) => {
-        console.log(response);
+        notify("Order has accepted Successfully");
         setTimeout(() => {
-          notify("Order has accepted Successfully");
           navigate("/order");
-        }, 2000);
+        }, 3000);
       })
       .catch((error) => {
         setLoadBtn(false);

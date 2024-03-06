@@ -9,7 +9,7 @@ import EditForm from "./EditForm";
 import EditStatus from "./EditStatus";
 import ConfirmDelete from "./ConfirmDelete";
 
-const BuyerDashboard = ({ orders, approve }) => {
+const BuyerDashboard = ({ orders, approve, revoke }) => {
   const [editedOrder, setEditedOrder] = useState();
   const [editBtnClicked, setEditBtnClicked] = useState(false);
   const [caretBtnClicked, setCaretBtnClicked] = useState(false);
@@ -130,7 +130,7 @@ const BuyerDashboard = ({ orders, approve }) => {
               </div>
               <div className="col-lg-2 col-md-2 col-12 mt-lg-4 pt-2">
                 <div className="row ">
-                  <div className="col-lg-3 col-2">
+                  <div className={`col-lg-3 col-2 ${revoke && "d-none"}`}>
                     <p
                       onClick={() => setDeleteData(order.order_id)}
                       className="text-center cursor"
@@ -138,7 +138,7 @@ const BuyerDashboard = ({ orders, approve }) => {
                       <span className="bg-danger bi-x-lg text-white p-2 rounded cursor"></span>
                     </p>
                   </div>
-                  <div className="col-lg-3 col-2">
+                  <div className={`col-lg-3 col-2 ${revoke && "d-none"}`}>
                     <p
                       onClick={() => handleEditBtn(order.order_id)}
                       className="text-center cursor"
@@ -147,7 +147,7 @@ const BuyerDashboard = ({ orders, approve }) => {
                     </p>
                   </div>
                   {approve === true && (
-                    <div className="col-1">
+                    <div className={`col-1`}>
                       <p
                         onClick={() => handleStatus(order.order_id)}
                         className="text-center cursor"

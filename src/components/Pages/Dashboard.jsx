@@ -17,6 +17,8 @@ const Dashboard = () => {
   const [allWindows, setAllWindows] = useState();
   const [loading, setLoading] = useState(true);
   const [display, setDisplay] = useState("All");
+  const [acceptedOrder, setAcceptedOrder] = useState();
+  const [displayOrder, setDisplayOrder] = useState(false);
 
   const navigate = useNavigate();
   const { auth } = useAuth();
@@ -53,6 +55,20 @@ const Dashboard = () => {
         .catch((error) => {
           console.log(error);
         });
+
+      // Accepted Orders
+      axios
+        .get(`${request.baseUrl}api/traveler/order/${auth.id}`, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then((response) => {
+          setAcceptedOrder(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     } else {
       navigate("/admin");
     }
@@ -78,6 +94,12 @@ const Dashboard = () => {
       };
       setOrders(data);
     } else if (auth.User_Type.toLowerCase() === "traveler") {
+      if (stat === "Accepted") {
+        setDisplayOrder(true);
+      } else {
+        setDisplayOrder(false);
+      }
+
       if (stat === "All") {
         setWindow(allWindows);
         return;
@@ -162,7 +184,7 @@ const Dashboard = () => {
                   <div className="col-lg-4 col-6">
                     <p className="mt-3 pb-2 fs-5 bi-hash">
                       &nbsp;
-                      {display === "All" ? "All of your Orders" : display}
+                      {display === "All" ? "All of your Windows" : display}
                     </p>
                   </div>
                   <div className="col-lg-2 col-6 text-end">
@@ -170,14 +192,7 @@ const Dashboard = () => {
                       <option value="All">All</option>
                       <option value="Pending">Pending</option>
                       <option value="Approved">Approved</option>
-                      {user.User_Type === "buyer" && (
-                        <>
-                          <option value="Accepted">Accepted</option>
-                          <option value="Payed">Payed</option>
-                          <option value="Purchased">Purchased</option>
-                          <option value="Completed">Completed</option>
-                        </>
-                      )}
+                      <option value="Accepted">Accepted Orders</option>
                     </select>
                   </div>
                 </div>
@@ -185,6 +200,11 @@ const Dashboard = () => {
               {window ? (
                 window.results.length > 0 ? (
                   <TravelerDashboard window={window}></TravelerDashboard>
+                ) : displayOrder ? (
+                  <BuyerDashboard
+                    orders={acceptedOrder}
+                    revoke={true}
+                  ></BuyerDashboard>
                 ) : (
                   <p className="my-5 p-5 bg-white fs-5 text-center">
                     There is no Windows under this "{display}" Status

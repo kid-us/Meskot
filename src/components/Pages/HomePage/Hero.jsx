@@ -7,9 +7,15 @@ const Hero = ({ signBtn }) => {
       <div className="row justify-content-center px-lg-4">
         <div className="col-lg-6 col-md-6 col-12 mt-5 pt-lg-4">
           <h1 className="fw-semibold display-4 py-lg-0 py-md-0 py-4">
-            Launch or Scale your affiliate business
+            Launch or{" "}
+            <span className="bg-info rounded-pill px-3 text-white">
+              Scale your
+            </span>{" "}
+            <span className="bg-success rounded-pill px-3 text-white">
+              affiliate business
+            </span>
           </h1>
-          <p className="mt-4 font-poppins py-4">
+          <p className="my-5 p-3 rounded fw-semibold  bg-white">
             Tired of limited options? Meskot is your window to the world,
             offering anything from anywhere at unbeatable prices and top
             quality. Unlike traditional shopping, we connect you directly with

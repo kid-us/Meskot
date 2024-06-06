@@ -17,31 +17,35 @@ const Slides = ({ slidesPerView }) => {
       >
         {banner.map((ban, index) => (
           <SwiperSlide key={index}>
-            <div className="mb-5">
-              <div className="shadow bg-white rounded py-2">
-                <div className="banner-img-container pt-2 text-center">
-                  <Img
-                    src={ban.img}
-                    alt="Order Picture"
-                    className="banner-img"
-                  ></Img>
-                </div>
-
-                <div className="ps-4">
-                  <p className="fw-semibold mt-3 d-none d-md-block">
-                    <span className="font-poppins text-uppercase">
-                      {ban.type}
-                    </span>
-                    <span className="font-monospace ps-5 ms-5 small">
-                      Size {ban.size}
-                    </span>
-                  </p>
-                  {/* Small device */}
-                  <div className="fw-semibold d-block d-md-none">
-                    <p className="font-poppins text-uppercase">{ban.type}</p>
-                    <p className="font-monospace small">Size {ban.size}</p>
+            <div className="mb-4">
+              <div className="rounded px-3">
+                <div className="bg-dark rounded">
+                  <div className="pt-2 text-center">
+                    <img
+                      src={ban.img}
+                      alt="Order Picture"
+                      width={"90%"}
+                      height={250}
+                      className="object-fit-contain"
+                    />
                   </div>
-                  <p className="font-poppins pt-2 ">{ban.price}$</p>
+
+                  <div className="ps-4 mt-0 pb-2 text-white">
+                    <p className="fw-semibold d-none d-md-block">
+                      <span className="font-poppins text-uppercase">
+                        {ban.type}
+                      </span>
+                      <span className="font-monospace ps-5 ms-5 small">
+                        Size {ban.size}
+                      </span>
+                    </p>
+                    {/* Small device */}
+                    <div className="fw-semibold d-block d-md-none">
+                      <p className="font-poppins text-uppercase">{ban.type}</p>
+                      <p className="font-monospace small">Size {ban.size}</p>
+                    </div>
+                    <p className="font-poppins pt-2 ">{ban.price}$</p>
+                  </div>
                 </div>
               </div>
             </div>

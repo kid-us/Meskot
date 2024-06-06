@@ -11,6 +11,25 @@ body {
   background-color: #f7f7f7;
 }
 
+.card-bg {
+  background-color: #d9f3eb !important;
+}
+
+.card-bg2 {
+  /* background-color: #ffe6fa; */
+  background: linear-gradient(-225deg, #e3fdf5 0%, #ffe6fa 100%);
+}
+
+.about {
+  background: linear-gradient(-225deg, #e3fdf5 0%, #ffe6fa 100%);
+  transition: 0.5s;
+}
+
+.about:hover {
+  background: #4399cb !important;
+  color: #fff;
+}
+
 h1,
 h2,
 h3,

@@ -19,7 +19,7 @@ const Slides = ({ slidesPerView }) => {
           <SwiperSlide key={index}>
             <div className="mb-4">
               <div className="rounded px-3">
-                <div className="bg-dark rounded">
+                <div className="shadow-sm bg-white rounded">
                   <div className="pt-2 text-center">
                     <img
                       src={ban.img}
@@ -30,7 +30,7 @@ const Slides = ({ slidesPerView }) => {
                     />
                   </div>
 
-                  <div className="ps-4 mt-0 pb-2 text-white">
+                  <div className="ps-4 mt-0 pb-2">
                     <p className="fw-semibold d-none d-md-block">
                       <span className="font-poppins text-uppercase">
                         {ban.type}

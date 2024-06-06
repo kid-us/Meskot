@@ -116,19 +116,19 @@ const Large = ({ user, notification }) => {
             ) : (
               <div className="row justify-content-end g-0">
                 <div className="col-1 text-end">
-                  <Link to={"/login"} className="text-black">
+                  <Link to={"/login"} className="text-black fs-6">
                     Blog
                   </Link>
                 </div>
                 <div className="col-1 text-end">
-                  <Link to={"/login"} className="text-black">
+                  <Link to={"/login"} className="text-black fs-6">
                     About Us
                   </Link>
                 </div>
-                <div className="col-2 ms-3 text-end me-4">
+                <div className="col-2 ms-3 text-end me-4 fs-6">
                   <Link
                     to={"/login"}
-                    className="nav-btn login-btn px-5 px-md-4 px-1 small text-light"
+                    className="nav-btn login-btn px-5 px-md-4 small text-light"
                   >
                     Sign Up
                   </Link>

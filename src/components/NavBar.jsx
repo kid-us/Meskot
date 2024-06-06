@@ -15,12 +15,16 @@ const NavBar = () => {
   }, [auth]);
   return (
     <>
-      <div className="navbar-container pt-1 pb-2 border small bg-white">
-        <div className="d-none d-md-block">
-          <Large user={user} notification={userNotification}></Large>
-        </div>
-        <div className="d-block d-md-none">
-          <Small user={user} notification={userNotification}></Small>
+      <div className="navbar-container">
+        <div className="container-fluid">
+          <div className="py-2 border small card-bg mt-2 rounded-pill">
+            <div className="d-none d-md-block">
+              <Large user={user} notification={userNotification}></Large>
+            </div>
+            <div className="d-block d-md-none">
+              <Small user={user} notification={userNotification}></Small>
+            </div>
+          </div>
         </div>
       </div>
     </>

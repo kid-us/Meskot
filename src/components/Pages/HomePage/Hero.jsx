@@ -10,10 +10,12 @@ const Hero = ({ signBtn }) => {
             Launch or Scale your affiliate business
           </h1>
           <p className="mt-4 font-poppins py-4">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veritatis
-            esse, fugit accusantium temporibus, dolorem eveniet deleniti modi
-            inventore porro, quibusdam atque officia soluta voluptatibus
-            accusamus. Cupiditate ipsa aliquid pariatur molestiae?
+            Tired of limited options? Meskot is your window to the world,
+            offering anything from anywhere at unbeatable prices and top
+            quality. Unlike traditional shopping, we connect you directly with
+            travelers bringing back your desired items. Simply sign up, post
+            your order, and relax! Our secure platform facilitates the entire
+            process, ensuring both buyer and traveler satisfaction.
           </p>
           {!signBtn && (
             <div className="row mt-5">
